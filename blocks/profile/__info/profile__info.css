@@ -1,0 +1,12 @@
+.profile__info {
+  border: 1px solid red;
+  display: grid;
+  grid-template-columns: max-content max-content;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+  "info-name edit-button"
+  "info-caption . ";
+}
+
+
+
