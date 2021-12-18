@@ -1,0 +1,15 @@
+.button-style {
+  background: none;
+  outline: 0;
+  cursor: pointer;
+  transition: all 0.4s ease-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.button-style:hover {
+  opacity: 0.6;
+}

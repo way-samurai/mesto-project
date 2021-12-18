@@ -7,8 +7,8 @@
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   text-rendering: optimizeLegibility;
-  max-width: 880px;
-  min-width: 320px;
+  max-width: 918px;
+  min-width: 288px;
   min-height: 100%;
   margin: 0 auto;
   display: flex;
@@ -16,5 +16,7 @@
   align-items: center;
   background-color: #000000;
   color: #FFFFFF;
-  padding: 0 27px;
+  box-sizing: content-box;
+  height: 100%;
+  transition: all 0.5s ease-out;
 }

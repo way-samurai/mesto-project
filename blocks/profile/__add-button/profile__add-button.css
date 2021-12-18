@@ -1,0 +1,20 @@
+.profile__add-button {
+  border: 1px solid #ffffff;
+  width: 150px;
+  height: 50px;
+  transition: all 0.5s ease-out;
+}
+
+@media (max-width: 700px) {
+  .profile__add-button {
+    margin-top: 20px;
+    width: 370px;
+  }
+}
+
+@media (max-width: 475px) {
+  .profile__add-button {
+    width: 282px;
+    margin-top: 0px;
+  }
+}

@@ -1,0 +1,11 @@
+.footer {
+  padding: 66px 19px 60px;
+  align-self: flex-start;
+  transition: all 0.5s ease-out;
+}
+
+@media (max-width: 475px) {
+  .footer {
+    padding: 48px 19px 36px;
+  }
+}

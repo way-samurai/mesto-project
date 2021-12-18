@@ -1,0 +1,9 @@
+.place__like-button {
+  margin-left: 30px;
+  min-width: 22px;
+  min-height: 19px;
+  border: 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}

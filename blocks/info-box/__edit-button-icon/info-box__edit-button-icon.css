@@ -1,0 +1,12 @@
+.info-box__edit-button-icon {
+  width: 10px;
+  height: 10px;
+  transition: all 0.5s ease-out;
+}
+
+@media (max-width: 475px) {
+  .info-box__edit-button-icon {
+    width: 7.5px;
+    height: 7.5px;
+  }
+}

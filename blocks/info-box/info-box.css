@@ -1,0 +1,21 @@
+.info-box {
+  display: grid;
+  grid-template-areas:
+    "info-box__name info-box__edit-button"
+    "info-box__caption .";
+  align-items: center;
+  gap: 16px 18px;
+  padding-right: 18px;
+  transition: all 0.5s ease-out;
+}
+
+@media (max-width: 700px) {
+  .info-box {
+    gap: 10px 14px;
+    padding-right: 0;
+    grid-template-columns: 18px 1fr 18px;
+    grid-template-areas:
+      ". info-box__name info-box__edit-button"
+      ". info-box__caption .";
+  }
+}
