@@ -18,7 +18,7 @@
 * Анимации и трансформации;
 * Медиазапросы
 
-#### Работу можно посмотреть [здесь](https://eukleidesrus.github.io/russian-travel/index.html).
+#### Работу можно посмотреть [здесь](https://eukleidesrus.github.io/mesto-project/index.html).
 
 ### Этот проект, выполнен в рамках учебной программы.
 
