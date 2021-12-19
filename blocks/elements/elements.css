@@ -19,3 +19,10 @@
     grid-template-rows: minmax(361px, 1fr);
   }
 }
+
+@media (max-width: 320px) {
+  .elements {
+    grid-template-columns: 282px;
+    grid-template-rows: 361px;
+  }
+}

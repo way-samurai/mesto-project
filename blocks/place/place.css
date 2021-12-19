@@ -6,3 +6,10 @@
   grid-template-rows: minmax(282px, 1fr) max-content;
   transition: all 0.5s ease-out;
 }
+
+@media (max-width: 320px) {
+  .place {
+    grid-template-columns: 282px;
+    grid-template-rows: 282px 79px;
+  }
+}
