@@ -1,6 +1,7 @@
 .elements {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 361px;
   gap: 20px 17px;
   transition: all 0.5s ease-out;
 }
@@ -8,11 +9,13 @@
 @media (max-width: 918px) {
   .elements {
     grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
   }
 }
 
 @media (max-width: 620px) {
   .elements {
     grid-template-columns: minmax(282px, 1fr);
+    grid-template-rows: minmax(361px, 1fr);
   }
 }
