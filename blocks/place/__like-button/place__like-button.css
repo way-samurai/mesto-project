@@ -6,4 +6,9 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  background-image: url(../../../images/like-button-disabled.svg);
+}
+
+.place__like-button:hover {
+  opacity: 0.5;
 }

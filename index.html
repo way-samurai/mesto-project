@@ -7,7 +7,7 @@
     <meta name="description" content="Mesto" />
     <meta name="keywords" content="HTML5, CSS" />
     <meta name="author" content="Гончаров Александр" />
-    <link rel="stylesheet" href="./page/index.css" />
+    <link rel="stylesheet" href="./pages/index.css" />
     <title>Meсто</title>
   </head>
 
@@ -15,7 +15,7 @@
     <header class="header" aria-label="Место">
       <img
         class="header__logo"
-        src="./image/logo__white.svg"
+        src="./images/logo__white.svg"
         alt="Здесь должен быть логотип"
       />
     </header>
@@ -23,25 +23,25 @@
       <section class="profile">
         <div class="profile__info">
           <img
-            src="./image/Jak.jpg"
+            src="./images/Jak.jpg"
             alt="Фото профиля"
             class="profile__avatar"
           />
           <div class="profile__info-box info-box">
             <h1 class="info-box__name">Жак-ив-Кусто</h1>
             <p class="info-box__caption">Исследователь океана</p>
-            <button type="button" class="info-box__edit-button button-style">
+            <button type="button" class="info-box__edit-button button-style" aria-label="Редактировать профиль">
               <img
                 class="info-box__edit-button-icon"
-                src="./image/edit-name-button.svg"
+                src="./images/edit-name-button.svg"
                 alt="Редактировать профиль"
               />
             </button>
           </div>
         </div>
-        <button type="button" class="profile__add-button button-style">
+        <button type="button" class="profile__add-button button-style" aria-label="Добавить аккаунт">
           <img
-            src="./image/add-account-button.svg"
+            src="./images/add-account-button.svg"
             class="profile__add-button-icon"
             alt="Добавить аккаунт"
           />
@@ -52,13 +52,14 @@
         <article class="place">
           <img
             class="place__image"
-            src="./image/Moscow.jpg"
+            src="./images/Moscow.jpg"
             alt="Фото Москвы"
           />
           <div class="place__description">
             <h2 class="place__title">Москва</h2>
             <button
-              class="place__like-button place__like-button_status_disabled button-style"
+              type="button"
+              class="place__like-button button-style"
               name="like_button"
             ></button>
           </div>
@@ -67,13 +68,14 @@
         <article class="place">
           <img
             class="place__image"
-            src="./image/Temirgoevskaya-2.jpg"
+            src="./images/Temirgoevskaya-2.jpg"
             alt="Фото Темиргоевской"
           />
           <div class="place__description">
             <h2 class="place__title">Темиргоевская</h2>
             <button
-              class="place__like-button place__like-button_status_active button-style"
+              type="button"
+              class="place__like-button place__like-button_active button-style"
               name="like_button"
             ></button>
           </div>
@@ -82,13 +84,14 @@
         <article class="place">
           <img
             class="place__image"
-            src="./image/novocherkassk.jpg"
+            src="./images/novocherkassk.jpg"
             alt="Фото Новочеркасска"
           />
           <div class="place__description">
             <h2 class="place__title">Новочеркасск</h2>
             <button
-              class="place__like-button place__like-button_status_disabled button-style"
+              type="button"
+              class="place__like-button button-style"
               name="like_button"
             ></button>
           </div>
@@ -97,13 +100,14 @@
         <article class="place">
           <img
             class="place__image"
-            src="./image/Karachaevsk.jpg"
+            src="./images/Karachaevsk.jpg"
             alt="Фото Карачаевска"
           />
           <div class="place__description">
             <h2 class="place__title">Карачаевск</h2>
             <button
-              class="place__like-button place__like-button_status_disabled button-style"
+              type="button"
+              class="place__like-button button-style"
               name="like_button"
             ></button>
           </div>
@@ -112,13 +116,14 @@
         <article class="place">
           <img
             class="place__image"
-            src="./image/Elbrus.jpg"
+            src="./images/Elbrus.jpg"
             alt="Фото Эльбруса"
           />
           <div class="place__description">
             <h2 class="place__title">Эльбрус</h2>
             <button
-              class="place__like-button place__like-button_status_disabled button-style"
+              type="button"
+              class="place__like-button button-style"
               name="like_button"
             ></button>
           </div>
@@ -127,13 +132,14 @@
         <article class="place">
           <img
             class="place__image"
-            src="./image/Baikal.jpg"
+            src="./images/Baikal.jpg"
             alt="Фото Байкала"
           />
           <div class="place__description">
             <h2 class="place__title">Байкал</h2>
             <button
-              class="place__like-button place__like-button_status_disabled button-style"
+              type="button"
+              class="place__like-button button-style"
               name="like_button"
             ></button>
           </div>
@@ -142,36 +148,38 @@
     </main>
 
     <footer class="footer">
-      <h3 class="footer__copyright">© 2020 Mesto Russia</h3>
+      <p class="footer__copyright">© 2021 Mesto Russia</p>
     </footer>
 
-    <section class="popup popap_opened">
-      <form name="popup" class="popup__container" action="#" method="get">
-        <h2 class="popup__title">Редактировать профиль</h2>
-        <input
-          type="text"
-          name="name"
-          class="popup__item popup__item_name"
-          required
-          placeholder="Ваше имя"
-          value="Жак-ив-Кусто"
-        />
-        <input
-          type="text"
-          name="operation"
-          class="popup__item popup__item_caption"
-          placeholder="Расскажите о себе"
-          value="Исследователь океана"
-        />
-        <button type="submit" class="popup__submit">Сохранить</button>
+    <div class="popup popup_opened">
+      <div class="popup__structure-wrapper">
         <button type="button" class="popup__close button-style">
           <img
             class="popup__close-image"
-            src="./image/Close-Icon.svg"
+            src="./images/Close-Icon.svg"
             alt="Закрыть меню"
           />
         </button>
-      </form>
-    </section>
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <form name="popup" class="popup__container" action="#" method="get">
+          <input
+            type="text"
+            name="name"
+            class="popup__name"
+            required
+            placeholder="Ваше имя"
+            value="Жак-ив-Кусто"
+          />
+          <input
+            type="text"
+            name="operation"
+            class="popup__operation"
+            placeholder="Расскажите о себе"
+            value="Исследователь океана"
+          />
+          <button type="submit" class="popup__submit">Сохранить</button>
+        </form>
+      </div>
+    </div>
   </body>
 </html>

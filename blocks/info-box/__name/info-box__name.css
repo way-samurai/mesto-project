@@ -8,6 +8,10 @@
   font-weight: 500;
   font-size: 42px;
   line-height: 48px;
+  text-overflow: ellipsis;
+  max-width: 520px;
+  overflow: hidden;
+  white-space: nowrap;
   transition: all 0.5s ease-out;
 }
 

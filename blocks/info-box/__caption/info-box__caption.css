@@ -3,9 +3,10 @@
   margin: 0;
   padding: 0;
   align-self: start;
-  white-space: wrap;
+  white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+  max-width: 520px;
   font-size: 18px;
   line-height: 22px;
   transition: all 0.5s ease-out;

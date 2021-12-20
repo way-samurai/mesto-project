@@ -7,15 +7,18 @@
   min-height: 50px;
   font-size: 18px;
   line-height: 22px;
+  border-radius: 2px;
   transition: all 0.5s ease-out;
 }
 
 .popup__submit:hover {
-  opacity: 0.7;
+  opacity: 0.8;
+  cursor: pointer;
 }
 
 @media (max-width: 620px) {
   .popup__submit {
+    margin: 45px 0 0;
     min-height: 46px;
     font-size: 14px;
     line-height: 17px;
