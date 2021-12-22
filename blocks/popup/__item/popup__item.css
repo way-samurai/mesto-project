@@ -1,13 +1,19 @@
-.popup__operation {
+.popup__item {
   font-size: 14px;
   line-height: 17px;
   border: none;
   border-radius: none;
   border-bottom: 1px solid rgb(0, 0, 0, .2);
   padding: 0 0 10px;
+  margin: 0 0 30px;
+}
+
+.popup__item:focus {
+  outline: none;
+}
+
+.popup__item:last-of-type {
   margin: 0;
 }
 
-.popup__operation:focus {
-  outline: none;
-}
+
