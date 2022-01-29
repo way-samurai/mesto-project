@@ -49,101 +49,7 @@
       </section>
 
       <section class="elements" aria-label="Места">
-        <article class="place">
-          <img
-            class="place__image"
-            src="./images/Moscow.jpg"
-            alt="Фото Москвы"
-          />
-          <div class="place__description">
-            <h2 class="place__title">Москва</h2>
-            <button
-              type="button"
-              class="place__like-button button-style"
-              name="like_button"
-            ></button>
-          </div>
-        </article>
 
-        <article class="place">
-          <img
-            class="place__image"
-            src="./images/Temirgoevskaya-2.jpg"
-            alt="Фото Темиргоевской"
-          />
-          <div class="place__description">
-            <h2 class="place__title">Темиргоевская</h2>
-            <button
-              type="button"
-              class="place__like-button place__like-button_active button-style"
-              name="like_button"
-            ></button>
-          </div>
-        </article>
-
-        <article class="place">
-          <img
-            class="place__image"
-            src="./images/novocherkassk.jpg"
-            alt="Фото Новочеркасска"
-          />
-          <div class="place__description">
-            <h2 class="place__title">Новочеркасск</h2>
-            <button
-              type="button"
-              class="place__like-button button-style"
-              name="like_button"
-            ></button>
-          </div>
-        </article>
-
-        <article class="place">
-          <img
-            class="place__image"
-            src="./images/Karachaevsk.jpg"
-            alt="Фото Карачаевска"
-          />
-          <div class="place__description">
-            <h2 class="place__title">Карачаевск</h2>
-            <button
-              type="button"
-              class="place__like-button button-style"
-              name="like_button"
-            ></button>
-          </div>
-        </article>
-
-        <article class="place">
-          <img
-            class="place__image"
-            src="./images/Elbrus.jpg"
-            alt="Фото Эльбруса"
-          />
-          <div class="place__description">
-            <h2 class="place__title">Эльбрус</h2>
-            <button
-              type="button"
-              class="place__like-button button-style"
-              name="like_button"
-            ></button>
-          </div>
-        </article>
-
-        <article class="place">
-          <img
-            class="place__image"
-            src="./images/Baikal.jpg"
-            alt="Фото Байкала"
-          />
-          <div class="place__description">
-            <h2 class="place__title">Байкал</h2>
-            <button
-              type="button"
-              class="place__like-button button-style"
-              name="like_button"
-            ></button>
-          </div>
-        </article>
       </section>
     </main>
 
@@ -151,7 +57,7 @@
       <p class="footer__copyright">© 2021 Mesto Russia</p>
     </footer>
 
-    <div class="popup popup_opened">
+    <div class="popup">
       <div class="popup__structure-wrapper">
         <button type="button" class="popup__close button-style" aria-label="Закрыть меню">
           <img
@@ -181,5 +87,74 @@
         </form>
       </div>
     </div>
+
+    <div class="popup">
+      <div class="popup__structure-wrapper">
+        <button type="button" class="popup__close button-style" aria-label="Закрыть меню">
+          <img
+            class="popup__close-image"
+            src="./images/Close-Icon.svg"
+            alt="Закрыть меню"
+          />
+        </button>
+        <h2 class="popup__title">Новое место</h2>
+        <form name="add-places" class="popup__container" action="#" method="get">
+          <input
+            type="text"
+            name="name"
+            class="popup__item popup__item_data_name"
+            required
+            placeholder="Название"
+            value=""
+          />
+          <input
+            type="text"
+            name="operation"
+            class="popup__item popup__item_data_operation"
+            placeholder="Ссылка на картинку"
+            value=""
+          />
+          <button type="submit" class="popup__submit" aria-label="Создать">Создать</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="popup popup_opened">
+      <div class="popup__fullscreen-wrapper" style="border: 1px red solid">
+        <button type="button" class="popup__close button-style" aria-label="Закрыть меню" style="border: 1px red solid">
+          <img
+            class="popup__close-image"
+            src="./images/Close-Icon.svg"
+            alt="Закрыть меню"
+          />
+        </button>
+        <figure class="popup__figure" style="border: 1px red solid">
+          <img class="popup__fullscreen-image" src="#" alt="Здесь должно быть фото :(">
+          <figcaption class="popup__image-caption" style="border: 1px red solid"></figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <template class="place">
+      <button
+        type="button"
+        class="place__delete-button"
+        name="delete-button"></button>
+      <img
+        class="place__image"
+        src="#"
+        alt=""
+      />  <!-- Отработать src -->
+      <div class="place__description">
+        <h2 class="place__title"></h2>
+        <button
+          type="button"
+          class="place__like-button button-style"
+          name="like-button"
+        ></button>
+      </div>
+    </template>
+
+    <script src="./pages/index.js"></script>
   </body>
 </html>
