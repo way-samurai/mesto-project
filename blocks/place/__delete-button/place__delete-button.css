@@ -4,7 +4,6 @@
   position: absolute;
   top: 20px;
   right: 20px;
-  z-index: 1;
   width: 18px;
   height: 19px;
   background-image: url(../../../images/delete-button.svg);

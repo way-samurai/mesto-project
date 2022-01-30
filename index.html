@@ -20,6 +20,7 @@
       />
     </header>
     <main class="content">
+
       <section class="profile">
         <div class="profile__info">
           <img
@@ -46,18 +47,17 @@
         <button
           type="button"
           class="profile__add-button button-style"
-          aria-label="Добавить аккаунт"
+          aria-label="Добавить карточку"
         >
           <img
             src="./images/add-account-button.svg"
             class="profile__add-button-icon"
-            alt="Добавить аккаунт"
+            alt="Добавить карточку"
           />
         </button>
       </section>
 
       <section class="elements" aria-label="Места">
-
 
       </section>
     </main>
@@ -66,7 +66,7 @@
       <p class="footer__copyright">© 2021 Mesto Russia</p>
     </footer>
 
-    <div class="popup">
+    <div id="editPopup" class="popup">
       <div class="popup__structure-wrapper">
         <button
           type="button"
@@ -108,7 +108,7 @@
       </div>
     </div>
 
-    <div class="popup">
+    <div id="addPopup" class="popup">
       <div class="popup__structure-wrapper">
         <button
           type="button"
@@ -150,7 +150,7 @@
       </div>
     </div>
 
-    <div class="popup popup_opened">
+    <div id="openImage" class="popup">
       <div class="popup__fullscreen-wrapper">
         <button
           type="button"
@@ -169,7 +169,7 @@
             src="#"
             alt="Здесь должно быть фото :("
           />
-          <figcaption class="popup__image-caption">ТИПО ПОДПИСЬ</figcaption>
+          <figcaption class="popup__image-caption"></figcaption>
         </figure>
       </div>
     </div>
@@ -181,7 +181,6 @@
           class="place__delete-button"
           name="delete-button"></button>
         <img class="place__image" src="#" alt="" />
-        <!-- Отработать src -->
         <div class="place__description">
           <h2 class="place__title"></h2>
           <button
