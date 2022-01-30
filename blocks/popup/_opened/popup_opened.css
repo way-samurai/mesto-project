@@ -1,3 +1,4 @@
 .popup_opened {
   display: flex;
+  transition: all .3 linear;
 }
