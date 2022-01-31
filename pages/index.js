@@ -190,4 +190,3 @@ saveCardButton.addEventListener("click", (evt) => {
   const clickClose = evt.target.closest(".popup");
   clickClose.classList.toggle("popup_opened");
 });
-

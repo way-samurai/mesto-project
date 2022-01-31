@@ -1,8 +1,5 @@
 .popup__fullscreen-wrapper {
   display: flex;
   position: relative;
-  justify-content: center;
-  max-width: 75vw;
-  max-height: 75vh;
 }
 
