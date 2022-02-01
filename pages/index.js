@@ -82,7 +82,7 @@ function togglePopup(popup) {
   popup.classList.toggle("popup_opened");
 }
 
-//Добавление карточек
+//Функция добавления карточек
 const addCardToContainer = (cardElement) => {
   //клонируем разметку шаблона карточки
   const cardsElement = cardTemplate.content.cloneNode(true);
@@ -129,26 +129,28 @@ const addCardToContainer = (cardElement) => {
 const reverseCards = initialCards.reverse();
 initialCards.forEach(addCardToContainer);
 
+//функция закрытия попапа
+function closePopup(evt) {
+  const clickClose = evt.target.closest(".popup");
+  clickClose.classList.toggle("popup_opened");
+}
+
 //закрытие попапа редактирования
 const popupEditCloseButton = editPopup.querySelector(".popup__close");
 popupEditCloseButton.addEventListener("click", (evt) => {
-  const clickClose = evt.target.closest(".popup");
-  clickClose.classList.toggle("popup_opened");
+  closePopup(evt);
 });
 
 //закрытие попапа добавления
 const popupAddCardClose = addPopup.querySelector(".popup__close");
 popupAddCardClose.addEventListener("click", (evt) => {
-  const clickClose = evt.target.closest(".popup");
-  clickClose.classList.toggle("popup_opened");
-  popupAddForm.reset();
+  closePopup(evt);
 });
 
 //закрытие попапа с фото
 const photoCloseButton = openImage.querySelector(".popup__close");
 photoCloseButton.addEventListener("click", (evt) => {
-  const clickClose = evt.target.closest(".popup");
-  clickClose.classList.toggle("popup_opened");
+  closePopup(evt);
 });
 
 //Слушатель на кнопке редактирование профиля
@@ -169,10 +171,7 @@ profileSaveButton.addEventListener("click", (evt) => {
   //заполнение полей из введенных данных
   profileName.textContent = nameInput.value;
   profileCaption.textContent = operationInput.value;
-  //сброс полей формы
-  popupAddForm.reset();
-  const clickClose = evt.target.closest(".popup");
-  clickClose.classList.toggle("popup_opened");
+  closePopup(evt);
 });
 
 //Добавление карточки
@@ -187,6 +186,5 @@ saveCardButton.addEventListener("click", (evt) => {
   addCardToContainer(newCard);
   popupAddForm.reset();
   //закрытие попапа
-  const clickClose = evt.target.closest(".popup");
-  clickClose.classList.toggle("popup_opened");
+  closePopup(evt);
 });
