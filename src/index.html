@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ru" class="html">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <meta name="description" content="Mesto" />
+  <meta name="keywords" content="HTML5, CSS" />
+  <meta name="author" content="Гончаров Александр" />
+  <link rel="stylesheet" href="./pages/index.css" />
+  <title>Meсто</title>
+</head>
+
+<body class="page">
+  <header class="header" aria-label="Место">
+    <img class="header__logo" src="./images/logo__white.svg" alt="Здесь должен быть логотип" />
+  </header>
+  <main class="content">
+    <section class="profile">
+      <div class="profile__info">
+        <img src="./images/Jak.jpg" alt="Фото профиля" class="profile__avatar" />
+        <div class="profile__info-box info-box">
+          <h1 class="info-box__name">Жак-ив-Кусто</h1>
+          <p class="info-box__caption">Исследователь океана</p>
+          <button type="button" class="info-box__edit-button button-style" aria-label="Редактировать профиль">
+            <img class="info-box__edit-button-icon" src="./images/edit-name-button.svg" alt="Редактировать профиль" />
+          </button>
+        </div>
+      </div>
+      <button type="button" class="profile__add-button button-style" aria-label="Добавить карточку">
+        <img src="./images/add-account-button.svg" class="profile__add-button-icon" alt="Добавить карточку" />
+      </button>
+    </section>
+
+    <section class="elements" aria-label="Места"></section>
+  </main>
+
+  <footer class="footer">
+    <p class="footer__copyright">© 2022 Mesto Russia</p>
+  </footer>
+
+
+
+
+
+
+  <div id="editPopup" class="popup">
+    <div class="popup__structure-wrapper">
+      <button type="button" class="popup__close button-style" aria-label="Закрыть меню">
+        <img class="popup__close-image" src="./images/Close-Icon.svg" alt="Закрыть меню" />
+      </button>
+      <h2 class="popup__title">Редактировать профиль</h2>
+
+      <form name="profile-edit" class="popup__form" action="#" method="get" novalidate>
+
+        <input type="text" name="username" class="popup__input popup__input_data_name" placeholder="Ваше имя"
+          value="Жак-ив-Кусто" minlength="2" maxlength="40" required />
+        <span class="popup__input-error username-error"></span>
+
+        <input type="text" name="operation" class="popup__input popup__input_data_operation"
+          placeholder="Расскажите о себе" value="Исследователь океана" minlength="2" maxlength="200" required/>
+        <span class="popup__input-error operation-error"></span>
+
+        <button type="submit" class="popup__submit" aria-label="Сохранить">
+          Сохранить
+        </button>
+      </form>
+    </div>
+  </div>
+
+
+
+  <div id="addPopup" class="popup">
+    <div class="popup__structure-wrapper">
+      <button type="button" class="popup__close button-style" aria-label="Закрыть меню">
+        <img class="popup__close-image" src="./images/Close-Icon.svg" alt="Закрыть меню" />
+      </button>
+      <h2 class="popup__title">Новое место</h2>
+
+      <form name="add-places" class="popup__form" action="#" method="get" novalidate>
+        <input type="text" name="placename" class="popup__input popup__input_data_name" placeholder="Название"
+          value="" minlength="2" maxlength="30" required/>
+        <span class="popup__input-error placename-error"></span>
+
+        <input type="url" name="imagelink" class="popup__input popup__input_data_operation"
+          placeholder="Ссылка на картинку" value="" required/>
+        <span class="popup__input-error imagelink-error"></span>
+
+
+        <button type="submit" class="popup__submit" aria-label="Создать">
+          Создать
+        </button>
+      </form>
+    </div>
+  </div>
+
+
+
+
+
+
+  <div id="openImage" class="popup">
+    <div class="popup__fullscreen-wrapper">
+      <button type="button" class="popup__close button-style" aria-label="Закрыть меню">
+        <img class="popup__close-image" src="./images/Close-Icon.svg" alt="Закрыть меню" />
+      </button>
+      <figure class="popup__figure">
+        <img class="popup__fullscreen-image" src="#" alt="Здесь должно быть фото :(" />
+        <figcaption class="popup__image-caption"></figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <template class="card-template">
+    <article class="place">
+      <button type="button" class="place__delete-button" name="delete-button"></button>
+      <img class="place__image" src="#" alt="" />
+      <div class="place__description">
+        <h2 class="place__title"></h2>
+        <button type="button" class="place__like-button button-style" name="like-button"></button>
+      </div>
+    </article>
+  </template>
+
+  <script src="./pages/index.js"></script>
+</body>
+
+</html>

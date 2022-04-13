@@ -1,4 +1,4 @@
-.popup__item {
+.popup__input {
   font-size: 14px;
   line-height: 17px;
   border: none;
@@ -8,11 +8,11 @@
   margin: 0 0 30px;
 }
 
-.popup__item:focus {
+.popup__input:focus {
   outline: none;
 }
 
-.popup__item:last-of-type {
+.popup__input:last-of-type {
   margin: 0;
 }
 
