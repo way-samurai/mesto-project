@@ -1,7 +1,7 @@
+import '../pages/index.css'
 import {createCard, addCard, renderingCards}  from './card' //скорее всего глюк vs code
-import {initialCards} from './initialCards'; 
+import {initialCards} from './initialCards';
 import {closePopup} from './utils';
-
 import {
   closePopupEdit,
   addPopupCardClose,
@@ -10,6 +10,10 @@ import {
   openAddCardPopup,
   saveInfoPtofile
 } from './modal'
+
+import {
+  enableValidation
+} from "./validate.js";
 
 const popups = document.querySelectorAll('.popup');
 
@@ -40,5 +44,14 @@ popupAddForm.addEventListener("submit", (evt) => {
   //закрытие попапа
   const clickClose = evt.target.closest(".popup");
   closePopup(clickClose);
+});
+
+enableValidation({
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__submit",
+  inactiveButtonClass: "popup__submit_disabled",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__input-error_active",
 });
 

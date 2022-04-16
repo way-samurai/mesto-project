@@ -1,0 +1,13 @@
+.popup__input-error_active {
+  display: inline-block;
+  font-size: 12px;
+  line-height: 15px;
+  color: #ff0000;
+}
+
+.popup__input-error_active:last-of-type {
+  display: inline-block;
+  font-size: 12px;
+  line-height: 15px;
+  color: #ff0000;
+}
