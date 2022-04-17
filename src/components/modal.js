@@ -1,4 +1,17 @@
-import { openPopup, closePopup } from './utils';
+import { openPopup, closePopup } from "./utils";
+import {
+  profileName,
+  profileCaption,
+  editPopup,
+  profileEditButton,
+  profileFormSubmit,
+  nameInput,
+  operationInput,
+  addPopup,
+  addCardButton,
+  popupAddForm,
+  openImage,
+} from "./data";
 
 function closePopupEdit() {
   //закрытие попапа редактирования
@@ -28,7 +41,7 @@ function closePopupPhoto() {
   });
 }
 
-function editProfile () {
+function editProfile() {
   //Слушатель на кнопке редактирование профиля
   profileEditButton.addEventListener("click", function () {
     nameInput.value = profileName.textContent;
@@ -62,5 +75,5 @@ export {
   closePopupPhoto,
   editProfile,
   openAddCardPopup,
-  saveInfoPtofile
-}
+  saveInfoPtofile,
+};

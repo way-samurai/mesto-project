@@ -1,12 +1,20 @@
+import {
+  openPopup
+} from './utils'
+
+import {
+  cardTemplate,
+  openImage,
+  popupImage,
+  popupImageCaption,
+  placesElements
+} from './data'
+
 //Добавление карточек
 function createCard(cardElement) {
-  //клонируем разметку шаблона карточки
   const cardsElement = cardTemplate.content.cloneNode(true);
-  //Название места
   cardsElement.querySelector(".place__title").textContent = cardElement.name;
-  //Изображение места
   cardsElement.querySelector(".place__image").src = cardElement.link;
-  //Альтернативное название изображение в случае не прогрузки картинки или нерабочей ссылки
   cardsElement.querySelector(".place__image").alt = cardElement.name;
   //кнопка лайка
   cardsElement
@@ -53,7 +61,6 @@ function renderingCards(initialCards) {
 }
 
 export {
-  createCard,
   addCard,
   renderingCards
 }

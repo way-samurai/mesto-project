@@ -6,14 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <meta name="description" content="Mesto" />
-  <meta name="keywords" content="HTML5, CSS" />
+  <meta name="keywords" content="HTML5, CSS, js" />
   <meta name="author" content="Гончаров Александр" />
   <title>Meсто</title>
 </head>
 
 <body class="page">
   <header class="header" aria-label="Место">
-    <img class="header__logo" src="<%=require('./images/logo__white.svg')%>"  alt="Здесь должен быть логотип" />
+    <img class="header__logo" src="<%=require('./images/logo__white.svg')%>" alt="Здесь должен быть логотип" />
   </header>
   <main class="content">
     <section class="profile">
@@ -23,8 +23,8 @@
           <h1 class="info-box__name">Жак-ив-Кусто</h1>
           <p class="info-box__caption">Исследователь океана</p>
           <button type="button" class="info-box__edit-button button-style" aria-label="Редактировать профиль">
-            <img class="info-box__edit-button-icon"
-              src="<%=require('./images/edit-name-button.svg')%>" alt="Редактировать профиль" />
+            <img class="info-box__edit-button-icon" src="<%=require('./images/edit-name-button.svg')%>"
+              alt="Редактировать профиль" />
           </button>
         </div>
       </div>
@@ -41,11 +41,6 @@
     <p class="footer__copyright">© 2022 Mesto Russia</p>
   </footer>
 
-
-
-
-
-
   <div id="editPopup" class="popup">
     <div class="popup__structure-wrapper">
       <button type="button" class="popup__close button-style" aria-label="Закрыть меню">
@@ -54,13 +49,12 @@
       <h2 class="popup__title">Редактировать профиль</h2>
 
       <form name="profile-edit" class="popup__form" action="#" method="get" novalidate>
-
-        <input type="text" name="username" class="popup__input popup__input_data_name" placeholder="Ваше имя"
-          value="Жак-ив-Кусто" minlength="2" maxlength="40" required />
+        <input type="text" name="username" id="username" class="popup__input popup__input_data_name"
+          placeholder="Ваше имя" value="Жак-ив-Кусто" minlength="2" maxlength="40" required />
         <span class="username-error popup__input-error"></span>
 
-        <input type="text" name="operation" class="popup__input popup__input_data_operation"
-          placeholder="Расскажите о себе" value="Исследователь океана" minlength="2" maxlength="200" required/>
+        <input type="text" name="operation" id="operation" class="popup__input popup__input_data_operation"
+          placeholder="Расскажите о себе" value="Исследователь океана" minlength="2" maxlength="200" required />
         <span class="operation-error popup__input-error"></span>
 
         <button type="submit" class="popup__submit" aria-label="Сохранить">
@@ -69,8 +63,6 @@
       </form>
     </div>
   </div>
-
-
 
   <div id="addPopup" class="popup">
     <div class="popup__structure-wrapper">
@@ -81,13 +73,12 @@
 
       <form name="add-places" class="popup__form" action="#" method="get" novalidate>
         <input type="text" name="placename" id="placename" class="popup__input popup__input_data_name"
-          placeholder="Название" value="" minlength="2" maxlength="30" required/>
+          placeholder="Название" value="" minlength="2" maxlength="30" required />
         <span class="placename-error popup__input-error"></span>
 
         <input type="url" name="imagelink" id="imagelink" class="popup__input popup__input_data_operation"
-          placeholder="Ссылка на картинку" value="" required/>
+          placeholder="Ссылка на картинку" value="" required />
         <span class="imagelink-error popup__input-error"></span>
-
 
         <button type="submit" class="popup__submit" aria-label="Создать">
           Создать
@@ -95,11 +86,6 @@
       </form>
     </div>
   </div>
-
-
-
-
-
 
   <div id="openImage" class="popup">
     <div class="popup__fullscreen-wrapper">
