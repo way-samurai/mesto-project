@@ -19,6 +19,7 @@ function closePopupEdit() {
   popupEditCloseButton.addEventListener("click", (evt) => {
     const clickClose = evt.target.closest(".popup");
     closePopup(clickClose);
+    popupAddForm.reset();
   });
 }
 
@@ -77,3 +78,4 @@ export {
   openAddCardPopup,
   saveInfoPtofile,
 };
+
