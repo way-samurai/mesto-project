@@ -45,7 +45,6 @@ function createCard(cardElement) {
       popupImageCaption.textContent = cardText;
       popupImage.alt = cardText;
     });
-
   return cardsElement;
 }
 

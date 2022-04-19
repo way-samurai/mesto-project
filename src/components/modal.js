@@ -9,38 +9,7 @@ import {
   operationInput,
   addPopup,
   addCardButton,
-  popupAddForm,
-  openImage,
 } from "./data";
-
-function closePopupEdit() {
-  //закрытие попапа редактирования
-  const popupEditCloseButton = editPopup.querySelector(".popup__close");
-  popupEditCloseButton.addEventListener("click", (evt) => {
-    const clickClose = evt.target.closest(".popup");
-    closePopup(clickClose);
-    popupAddForm.reset();
-  });
-}
-
-function addPopupCardClose() {
-  //закрытие попапа добавления
-  const popupAddCardClose = addPopup.querySelector(".popup__close");
-  popupAddCardClose.addEventListener("click", (evt) => {
-    const clickClose = evt.target.closest(".popup");
-    closePopup(clickClose);
-    popupAddForm.reset();
-  });
-}
-
-function closePopupPhoto() {
-  //закрытие попапа с фото по клику
-  const photoCloseButton = openImage.querySelector(".popup__close");
-  photoCloseButton.addEventListener("click", (evt) => {
-    const clickClose = evt.target.closest(".popup");
-    closePopup(clickClose);
-  });
-}
 
 function editProfile() {
   //Слушатель на кнопке редактирование профиля
@@ -71,9 +40,6 @@ function saveInfoPtofile() {
 }
 
 export {
-  closePopupEdit,
-  addPopupCardClose,
-  closePopupPhoto,
   editProfile,
   openAddCardPopup,
   saveInfoPtofile,

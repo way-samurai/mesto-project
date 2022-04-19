@@ -1,14 +1,16 @@
 import "../pages/index.css";
 
-import { popupAddForm, nameCardInput, linkCardInput } from "./data";
+import {
+  popupAddForm,
+  nameCardInput,
+  linkCardInput,
+  popupSubmitButton
+} from "./data";
 
 import { addCard, renderingCards } from "./card";
 import { initialCards } from "./initialCards";
 import { closePopup } from "./utils";
 import {
-  closePopupEdit,
-  addPopupCardClose,
-  closePopupPhoto,
   editProfile,
   openAddCardPopup,
   saveInfoPtofile,
@@ -17,20 +19,19 @@ import {
 import { enableValidation } from "./validate.js";
 
 openAddCardPopup();
-addPopupCardClose();
-closePopupPhoto();
 editProfile();
-closePopupEdit();
 saveInfoPtofile();
 
-//функция закрытия попапа по клику на оверлей
+//функция закрытия попапа
 const popups = document.querySelectorAll(".popup");
 popups.forEach((popup) => {
   popup.addEventListener("mousedown", (evt) => {
     if (evt.target.classList.contains("popup_opened")) {
       closePopup(popup);
     }
-    if (evt.target.classList.contains("popup__close")) {
+  });
+  popup.addEventListener("click", (evt) => {
+    if (evt.target.closest(".popup__close")) {
       closePopup(popup);
     }
   });
@@ -52,6 +53,8 @@ popupAddForm.addEventListener("submit", (evt) => {
   //закрытие попапа
   const clickClose = evt.target.closest(".popup");
   closePopup(clickClose);
+  popupSubmitButton.classList.add("popup__submit_disabled");
+  popupSubmitButton.disabled = true;
 });
 
 enableValidation({

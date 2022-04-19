@@ -29,6 +29,8 @@ const addPopup = document.querySelector("#addPopup");
 const addCardButton = profile.querySelector(".profile__add-button");
 //Форма добавления карточек
 const popupAddForm = addPopup.querySelector(".popup__form");
+//Кнопка сабмита формы добавления карточки
+const popupSubmitButton = popupAddForm.querySelector('.popup__submit');
 //Поле ввода названия карточки места
 const nameCardInput = addPopup.querySelector(".popup__input_data_name");
 //Поле для ввода ссылки на картинку места
@@ -65,5 +67,6 @@ export {
   openImage,
   popupImage,
   popupImageCaption,
-  placesElements
+  placesElements,
+  popupSubmitButton
 }
