@@ -59,3 +59,5 @@
 @import url(../blocks/popup/__fullscreen-image/popup__fullscreen-image.css);
 @import url(../blocks/popup/__image-caption/popup__image-caption.css);
 
+@import url(../blocks/place/__like-box/place__like-box.css);
+@import url(../blocks/place/__likes-counter/place__likes-counter.css);

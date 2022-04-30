@@ -1,3 +1,4 @@
+
 //функция открытия модального окна
 export function openPopup(popup) {
   popup.classList.add("popup_opened");

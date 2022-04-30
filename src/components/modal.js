@@ -27,8 +27,8 @@ function openAddCardPopup() {
   });
 }
 
+//сохранение профиля
 function saveInfoPtofile() {
-  //сохранение профиля
   profileFormSubmit.addEventListener("submit", (evt) => {
     evt.preventDefault();
     //заполнение полей из введенных данных
