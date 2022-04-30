@@ -36,6 +36,22 @@ const nameCardInput = addPopup.querySelector(".popup__input_data_name");
 //Поле для ввода ссылки на картинку места
 const linkCardInput = addPopup.querySelector(".popup__input_data_operation");
 
+
+
+
+//Изменение карточек
+//Попап изменения аватара
+const changeAvatarPopup = document.querySelector("#changeAvatarPopup");
+//Форма изменения фото аватара
+const formChangeAvatar = changeAvatarPopup.querySelector(".popup__form");
+//Поле ввода ссылки на картинку аватара
+const linkAvatarInput = formChangeAvatar.querySelector("#avarar-link");
+//Кнопка сабмита формы изменения аватара
+const changeAvatarSubmit = formChangeAvatar.querySelector(".popup__submit");
+
+
+
+
 //Открытие изображения
 //Попап открытия изображения
 const openImage = document.querySelector("#openImage");
@@ -68,5 +84,10 @@ export {
   popupImage,
   popupImageCaption,
   placesElements,
-  popupSubmitButton
+  popupSubmitButton,
+
+  changeAvatarPopup,
+  formChangeAvatar,
+  linkAvatarInput,
+  changeAvatarSubmit
 }

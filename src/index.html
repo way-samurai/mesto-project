@@ -87,6 +87,23 @@
     </div>
   </div>
 
+  <div id="changeAvatarPopup" class="popup">
+    <div class="popup__structure-wrapper">
+      <button type="button" class="popup__close button-style" aria-label="Закрыть меню">
+        <img class="popup__close-image" src="<%=require('./images/Close-Icon.svg')%>" alt="Закрыть меню" />
+      </button>
+      <h2 class="popup__title">Обновить аватар</h2>
+      <form name="changeAvatar" class="popup__form" action="#" method="get" novalidate>
+        <input type="url" name="avatar-link" id="avatar-link" class="popup__input popup__input_data_operation"
+          placeholder="Ссылка на картинку" />
+        <span class="avatar-link-error popup__input-error"></span>
+        <button type="submit" class="popup__submit" aria-label="Сохранить">
+          Сохранить
+        </button>
+      </form>
+    </div>
+  </div>
+
   <div id="openImage" class="popup">
     <div class="popup__fullscreen-wrapper">
       <button type="button" class="popup__close button-style" aria-label="Закрыть меню">
@@ -110,7 +127,6 @@
           <button type="button" class="place__like-button button-style" name="like-button"></button>
           <p class="place__likes-counter"></p>
         </fieldset>
-
       </div>
     </article>
   </template>
