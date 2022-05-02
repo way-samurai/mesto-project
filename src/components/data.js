@@ -1,7 +1,7 @@
 const pageContent = document.querySelector(".content");
 
 //Шаблон карточки
-const cardTemplate = document.querySelector(".card-template");
+const cardTemplate = document.querySelector(".card-template").content;
 
 //Поля вставки значений из редактора профиля
 const profile = pageContent.querySelector(".profile");
@@ -9,6 +9,7 @@ const profileInfo = pageContent.querySelector(".profile__info-box");
 
 const profileName = profileInfo.querySelector(".info-box__name");
 const profileCaption = profileInfo.querySelector(".info-box__caption");
+const profileImg = profile.querySelector(".profile__avatar")
 
 //Редактирование
 //Попап редактирования профиля
@@ -21,6 +22,8 @@ const profileFormSubmit = editPopup.querySelector(".popup__form");
 const nameInput = editPopup.querySelector(".popup__input_data_name");
 //Поле ввода "Деятельность" в форме редактирования профиля
 const operationInput = editPopup.querySelector(".popup__input_data_operation");
+//Кнопка сабмита профиля
+const profileSubmitButton = profileFormSubmit.querySelector(".popup__submit");
 
 //Добавление карточек
 //Попап добавления карточек мест
@@ -37,9 +40,13 @@ const nameCardInput = addPopup.querySelector(".popup__input_data_name");
 const linkCardInput = addPopup.querySelector(".popup__input_data_operation");
 
 
+const confirmPopup = document.querySelector("#confirm");
+const confirmForm = confirmPopup.querySelector(".popup__form");
+const confirmSubmitButton = confirmForm.querySelector(".popup__submit");
 
 
-//Изменение карточек
+const popupCloseButton = confirmPopup.querySelector(".popup__close") //удалить
+
 //Попап изменения аватара
 const changeAvatarPopup = document.querySelector("#changeAvatarPopup");
 //Форма изменения фото аватара
@@ -89,5 +96,14 @@ export {
   changeAvatarPopup,
   formChangeAvatar,
   linkAvatarInput,
-  changeAvatarSubmit
+  changeAvatarSubmit,
+  profileImg,
+
+  confirmPopup,
+  confirmSubmitButton,
+  confirmForm,
+  profileSubmitButton,
+
+  popupCloseButton
+
 }

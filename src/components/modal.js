@@ -1,4 +1,4 @@
-import { openPopup, closePopup } from "./utils";
+import { openPopup, closePopup, renderLoading } from "./utils";
 import {
   profileName,
   profileCaption,
@@ -9,7 +9,9 @@ import {
   operationInput,
   addPopup,
   addCardButton,
+  profileSubmitButton
 } from "./data";
+import {fetchEditUserInfo} from "./api";
 
 function editProfile() {
   //Слушатель на кнопке редактирование профиля
@@ -27,16 +29,17 @@ function openAddCardPopup() {
   });
 }
 
-//сохранение профиля
-function saveInfoPtofile() {
-  profileFormSubmit.addEventListener("submit", (evt) => {
-    evt.preventDefault();
-    //заполнение полей из введенных данных
-    profileName.textContent = nameInput.value;
-    profileCaption.textContent = operationInput.value;
-    const clickClose = evt.target.closest(".popup");
-    closePopup(clickClose);
-  });
+function saveInfoPtofile(evt) {
+  evt.preventDefault();
+  renderLoading(true, profileSubmitButton);
+  fetchEditUserInfo(nameInput.value, operationInput.value)
+    .then(() => {
+      profileName.textContent = nameInput.value;
+      profileCaption.textContent = operationInput.value;
+      closePopup(editPopup);
+    })
+    .catch((err) => console.log(err))
+    .finally(() => renderLoading(false, profileSubmitButton));
 }
 
 export {

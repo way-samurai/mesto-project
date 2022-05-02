@@ -18,10 +18,10 @@
   <main class="content">
     <section class="profile">
       <div class="profile__info">
-        <img src="<%=require('./images/Jak.jpg')%>" alt="Фото профиля" class="profile__avatar" />
+        <img src=" " alt="Фото профиля" class="profile__avatar" />
         <div class="profile__info-box info-box">
-          <h1 class="info-box__name">Жак-ив-Кусто</h1>
-          <p class="info-box__caption">Исследователь океана</p>
+          <h1 class="info-box__name"></h1>
+          <p class="info-box__caption"></p>
           <button type="button" class="info-box__edit-button button-style" aria-label="Редактировать профиль">
             <img class="info-box__edit-button-icon" src="<%=require('./images/edit-name-button.svg')%>"
               alt="Редактировать профиль" />
@@ -34,7 +34,9 @@
       </button>
     </section>
 
-    <section class="elements" aria-label="Места"></section>
+    <section class="elements" aria-label="Места">
+
+    </section>
   </main>
 
   <footer class="footer">
@@ -113,6 +115,20 @@
         <img class="popup__fullscreen-image" src="#" alt="Здесь должно быть фото :(" />
         <figcaption class="popup__image-caption"></figcaption>
       </figure>
+    </div>
+  </div>
+
+  <div id="confirm" class="popup">
+    <div class="popup__structure-wrapper">
+      <button type="button" class="popup__close button-style" aria-label="Закрыть меню">
+        <img class="popup__close-image" src="<%=require('./images/Close-Icon.svg')%>" alt="Закрыть меню" />
+      </button>
+      <form name="confirm-form" class="popup__form" action="#" method="get" novalidate>
+        <h2 class="popup__form-title">Вы уверены?</h2>
+        <button type="submit" class="popup__submit popup__submit_confirm" aria-label="Да">
+          Да
+        </button>
+      </form>
     </div>
   </div>
 

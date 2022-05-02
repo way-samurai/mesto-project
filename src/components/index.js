@@ -4,11 +4,25 @@ import {
   popupAddForm,
   nameCardInput,
   linkCardInput,
-  popupSubmitButton
+  popupSubmitButton,
+  profileName,
+  profileCaption,
+  profileImg,
+  placesElements,
+  confirmSubmitButton,
+  confirmForm,
+  editPopup,
+  profileFormSubmit,
+  confirmPopup
 } from "./data";
 
-import { addCard, renderingCards } from "./card";
-import { initialCards } from "./initialCards";
+import {
+  addCard,
+  createCard,
+  handleDeleteCardButtonClick,
+  submitDeleteCardAprove
+} from "./card";
+
 import { closePopup } from "./utils";
 import {
   editProfile,
@@ -18,9 +32,15 @@ import {
 
 import { enableValidation } from "./validate.js";
 
+import {
+  fetchGetUserInfo,
+  fetchGetInitialCards
+} from "./api.js";
+
 openAddCardPopup();
 editProfile();
-saveInfoPtofile();
+profileFormSubmit.addEventListener("submit", saveInfoPtofile)
+popupAddForm.addEventListener("submit", addCard);
 
 //функция закрытия попапа
 const popups = document.querySelectorAll(".popup");
@@ -37,25 +57,16 @@ popups.forEach((popup) => {
   });
 });
 
-renderingCards(initialCards);
+Promise.all([fetchGetUserInfo(), fetchGetInitialCards()])
+  .then(([userData, cardsData]) => {
+    profileName.textContent = userData.name;
+    profileCaption.textContent = userData.about;
+    profileImg.src = userData.avatar; //Добавить разметку
 
-//Добавление карточки
-popupAddForm.addEventListener("submit", (evt) => {
-  evt.preventDefault();
-  //создаем объект из введенных данных
-  const newCard = {
-    name: nameCardInput.value,
-    link: linkCardInput.value,
-  };
-  //вызов функции добавления карточки с новым объектом
-  addCard(newCard);
-  popupAddForm.reset();
-  //закрытие попапа
-  const clickClose = evt.target.closest(".popup");
-  closePopup(clickClose);
-  popupSubmitButton.classList.add("popup__submit_disabled");
-  popupSubmitButton.disabled = true;
-});
+    const cards = cardsData.map((card) => createCard(card, userData._id));
+    placesElements.prepend(...cards);
+  })
+  .catch((err) => console.log(err));
 
 enableValidation({
   formSelector: ".popup__form",
@@ -65,4 +76,8 @@ enableValidation({
   inputErrorClass: "popup__input_type_error",
   errorClass: "popup__input-error_active",
 });
+
+
+
+
 

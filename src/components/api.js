@@ -66,9 +66,9 @@ export const fetchAddHandleLikes = (id, method) => {
 };
 
 //Удаление карточки
-export const fetchDeleteCard = (id, method) => {
+export const fetchDeleteCard = (id) => {
   return fetch(`${config.baseUrl}/cards/${id}`, {
-    method: method,
+    method: "DELETE",
     headers: config.headers,
   }).then(onResponce);
 };

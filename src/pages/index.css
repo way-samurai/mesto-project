@@ -61,3 +61,8 @@
 
 @import url(../blocks/place/__like-box/place__like-box.css);
 @import url(../blocks/place/__likes-counter/place__likes-counter.css);
+
+@import url(../blocks/popup/__form-title/popup__form-title.css);
+@import url(../blocks/popup/__submit/_confirm/popup__submit_confirm.css);
+
+@import url(../blocks/place/__delete-button/_hidden/place__delete-button_hidden.css);

@@ -1,66 +1,133 @@
 import {
-  openPopup
-} from './utils'
+  fetchAddHandleLikes,
+  fetchAddNewCard,
+  fetchDeleteCard
+} from "./api";
+
+import {
+  closePopup,
+  openPopup,
+  renderLoading
+} from "./utils";
 
 import {
   cardTemplate,
   openImage,
   popupImage,
   popupImageCaption,
-  placesElements
-} from './data'
+  confirmPopup,
+  confirmSubmitButton,
+  popupSubmitButton,
+  linkCardInput,
+  nameCardInput,
+  placesElements,
+  popupAddForm,
+  addPopup,
+} from "./data";
+
+let cardForDelete = null;
+
+const cloneTemplate = () => {
+  return cardTemplate.querySelector(".place").cloneNode(true);
+};
+
+function aprovedCardDeletion () {
+  confirmSubmitButton.addEventListener("click", submitDeleteCardAprove(cardForDelete));
+}
+
+//прроверить код
+function handleDeleteCard (cardElement, _id) {
+  cardForDelete = { cardElement, _id };
+  openPopup(confirmPopup);
+  confirmSubmitButton.addEventListener("click", aprovedCardDeletion);
+};
 
 //Добавление карточек
-function createCard(cardElement) {
-  const cardsElement = cardTemplate.content.cloneNode(true);
-  cardsElement.querySelector(".place__title").textContent = cardElement.name;
-  cardsElement.querySelector(".place__image").src = cardElement.link;
-  cardsElement.querySelector(".place__image").alt = cardElement.name;
-  //кнопка лайка
-  cardsElement
-    .querySelector(".place__like-button")
-    .addEventListener("click", function (evt) {
-      evt.target.classList.toggle("place__like-button_active");
-    });
-  //Удаление карточки
-  cardsElement
-    .querySelector(".place__delete-button")
-    .addEventListener("click", (evt) => {
-      const cardItem = evt.target.closest(".place");
-      cardItem.remove();
-    });
+function createCard({name, link, _id, owner, likes}, myId) {
+  const cardElement = cloneTemplate();
+  const cardTitle = cardElement.querySelector(".place__title");
+  const cardImage = cardElement.querySelector(".place__image");
+  const cardLikesCounter = cardElement.querySelector(".place__likes-counter");
+  const cardLikeButton = cardElement.querySelector(".place__like-button");
+  const cardDeleteButton = cardElement.querySelector(".place__delete-button");
 
-  //Данные для попапа с фото
-  cardsElement
-    .querySelector(".place__image")
-    .addEventListener("click", (evt) => {
-      const cardLink = evt.target.src;
-      const cardName = evt.target.closest(".place");
-      const cardText = cardName.querySelector(".place__title").textContent;
+  cardTitle.textContent = name;
+  cardImage.src = link;
+  cardImage.alt = name;
+  cardLikesCounter.textContent = `${likes.length}`;
 
-      //открытие попапа с фото
-      openPopup(openImage);
-      //присвоение ссылки картинке
-      popupImage.src = cardLink;
-      popupImageCaption.textContent = cardText;
-      popupImage.alt = cardText;
-    });
-  return cardsElement;
+  if (likes.some((like) => like._id === myId)) {
+    cardLikeButton.classList.add("place__like-button_active");
+  }
+
+  cardDeleteButton.classList.toggle("place__delete-button_hidden", owner._id !== myId);
+
+  if (owner._id === myId) {
+    cardDeleteButton.addEventListener("click", () => {
+        handleDeleteCard(cardElement, _id);
+      }, true);
+  }
+
+  cardImage.addEventListener("click", function () {
+    popupImage.src = cardImage.src;
+    popupImage.alt = name;
+    popupImageCaption.textContent = name;
+    openPopup(openImage);
+  });
+
+  cardLikeButton.addEventListener("click", function handleLikes() {
+    const myLike = likes.find((like) => like._id === myId);
+    const method = myLike !== undefined ? "DELETE" : "PUT";
+    fetchAddHandleLikes(_id, method)
+      .then((data) => {
+        likes = data.likes;
+        cardLikesCounter.textContent = `${likes.length}`;
+
+        if (likes.some((like) => like._id === myId)) {
+          cardLikeButton.classList.add("place__like-button_active");
+        } else {
+          cardLikeButton.classList.remove("place__like-button_active");
+        }
+      })
+      .catch((err) => console.log(err));
+  });
+  return cardElement;
 }
 
-//вставка карточки в DOM
-function addCard(cardElement) {
-  placesElements.prepend(createCard(cardElement));
+function addCard(evt) {
+  evt.preventDefault();
+  renderLoading(true, popupSubmitButton);
+  fetchAddNewCard(nameCardInput.value, linkCardInput.value)
+    .then((card) => {
+      placesElements.prepend(createCard(card, card.owner._id));
+    })
+    .then(() => {
+      closePopup(addPopup);
+      popupAddForm.reset();
+      popupSubmitButton.classList.add("popup__submit_disabled");
+      popupSubmitButton.disabled = true;
+    })
+    .catch((err) => console.log(err))
+    .finally(() => renderLoading(false, popupSubmitButton));
 }
 
-//рендер элементов массива
-function renderingCards(initialCards) {
-  const renderCards = initialCards.reverse();
-  renderCards.forEach(addCard);
+function submitDeleteCardAprove(cardForDelete) {
+  if (!cardForDelete) return;
+
+  renderLoading(true, confirmSubmitButton);
+  fetchDeleteCard(cardForDelete._id)
+    .then(() => {
+      cardForDelete.cardElement.remove();
+      closePopup(confirmPopup);
+      cardForDelete = null;
+    })
+    .catch((err) => console.log(err))
+    .finally(() => renderLoading(false, confirmSubmitButton));
 }
 
 export {
+  createCard,
   addCard,
-  renderingCards
-}
-
+  submitDeleteCardAprove,
+  aprovedCardDeletion
+};
