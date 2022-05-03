@@ -76,10 +76,10 @@ export const fetchDeleteCard = (id) => {
 //Изменение аватара
 export const fetchEditUserAvatar = (link) => {
   return fetch(`${config.baseUrl}/users/me/avatar`, {
-    mathod: "PATCH",
+    method: "PATCH",
     headers: config.headers,
     body: JSON.stringify({
       avatar: link,
-    })
+    }),
   }).then(onResponce);
-}
+};

@@ -1,24 +1,27 @@
-import { openPopup, closePopup, renderLoading } from "./utils";
+import { openPopup } from "./utils";
 import {
   profileName,
   profileCaption,
   editPopup,
   profileEditButton,
-  profileFormSubmit,
   nameInput,
   operationInput,
   addPopup,
   addCardButton,
-  profileSubmitButton
+  profileAvatarContainer,
+  changeAvatarPopup,
+  changeAvatarSubmit,
+  profileSubmitButton,
 } from "./data";
-import {fetchEditUserInfo} from "./api";
 
-function editProfile() {
+function editProfileInfo() {
   //Слушатель на кнопке редактирование профиля
   profileEditButton.addEventListener("click", function () {
     nameInput.value = profileName.textContent;
     operationInput.value = profileCaption.textContent;
     openPopup(editPopup);
+    profileSubmitButton.disabled = true;
+    profileSubmitButton.classList.add("popup__submit_disabled");
   });
 }
 
@@ -29,22 +32,13 @@ function openAddCardPopup() {
   });
 }
 
-function saveInfoPtofile(evt) {
-  evt.preventDefault();
-  renderLoading(true, profileSubmitButton);
-  fetchEditUserInfo(nameInput.value, operationInput.value)
-    .then(() => {
-      profileName.textContent = nameInput.value;
-      profileCaption.textContent = operationInput.value;
-      closePopup(editPopup);
-    })
-    .catch((err) => console.log(err))
-    .finally(() => renderLoading(false, profileSubmitButton));
+function openchangeAvatarPopup() {
+  //Слушатель на кнопке аватара
+  profileAvatarContainer.addEventListener("click", function () {
+    openPopup(changeAvatarPopup);
+    changeAvatarSubmit.disabled = true;
+    changeAvatarSubmit.classList.add("popup__submit_disabled");
+  });
 }
 
-export {
-  editProfile,
-  openAddCardPopup,
-  saveInfoPtofile,
-};
-
+export { editProfileInfo, openAddCardPopup, openchangeAvatarPopup };

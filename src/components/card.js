@@ -1,14 +1,6 @@
-import {
-  fetchAddHandleLikes,
-  fetchAddNewCard,
-  fetchDeleteCard
-} from "./api";
+import { fetchAddHandleLikes, fetchAddNewCard, fetchDeleteCard } from "./api";
 
-import {
-  closePopup,
-  openPopup,
-  renderLoading
-} from "./utils";
+import { closePopup, openPopup, renderLoading } from "./utils";
 
 import {
   cardTemplate,
@@ -31,19 +23,22 @@ const cloneTemplate = () => {
   return cardTemplate.querySelector(".place").cloneNode(true);
 };
 
-function aprovedCardDeletion () {
-  confirmSubmitButton.addEventListener("click", submitDeleteCardAprove(cardForDelete));
+function aprovedCardDeletion() {
+  confirmSubmitButton.addEventListener(
+    "click",
+    submitDeleteCardAprove(cardForDelete)
+  );
 }
 
 //проверить код
-function handleDeleteCard (cardElement, _id) {
+function handleDeleteCard(cardElement, _id) {
   cardForDelete = { cardElement, _id };
   openPopup(confirmPopup);
   confirmSubmitButton.addEventListener("click", aprovedCardDeletion);
-};
+}
 
 //Добавление карточек
-function createCard({name, link, _id, owner, likes}, myId) {
+function createCard({ name, link, _id, owner, likes }, myId) {
   const cardElement = cloneTemplate();
   const cardTitle = cardElement.querySelector(".place__title");
   const cardImage = cardElement.querySelector(".place__image");
@@ -60,12 +55,19 @@ function createCard({name, link, _id, owner, likes}, myId) {
     cardLikeButton.classList.add("place__like-button_active");
   }
 
-  cardDeleteButton.classList.toggle("place__delete-button_hidden", owner._id !== myId);
+  cardDeleteButton.classList.toggle(
+    "place__delete-button_hidden",
+    owner._id !== myId
+  );
 
   if (owner._id === myId) {
-    cardDeleteButton.addEventListener("click", () => {
+    cardDeleteButton.addEventListener(
+      "click",
+      () => {
         handleDeleteCard(cardElement, _id);
-      }, true);
+      },
+      true
+    );
   }
 
   cardImage.addEventListener("click", function () {
@@ -125,9 +127,4 @@ function submitDeleteCardAprove(cardForDelete) {
     .finally(() => renderLoading(false, confirmSubmitButton));
 }
 
-export {
-  createCard,
-  addCard,
-  submitDeleteCardAprove,
-  aprovedCardDeletion
-};
+export { createCard, addCard, submitDeleteCardAprove, aprovedCardDeletion };

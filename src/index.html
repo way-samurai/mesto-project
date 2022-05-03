@@ -17,8 +17,6 @@
   </header>
   <main class="content">
     <section class="profile">
-
-
       <div class="profile__info">
         <button type="button" class="profile__avatar">
           <img src=" " alt="Фото профиля" class="profile__avatar-img" />
@@ -33,16 +31,13 @@
         </div>
       </div>
 
-
       <button type="button" class="profile__add-button button-style" aria-label="Добавить карточку">
         <img src="<%=require('./images/add-account-button.svg')%>" class="profile__add-button-icon"
           alt="Добавить карточку" />
       </button>
     </section>
 
-    <section class="elements" aria-label="Места">
-
-    </section>
+    <section class="elements" aria-label="Места"></section>
   </main>
 
   <footer class="footer">
@@ -56,7 +51,7 @@
       </button>
       <h2 class="popup__title">Редактировать профиль</h2>
 
-      <form name="profile-edit" class="popup__form" action="#" method="get" novalidate>
+      <form name="profile-edit" class="popup__form" novalidate>
         <input type="text" name="username" id="username" class="popup__input popup__input_data_name"
           placeholder="Ваше имя" value="Жак-ив-Кусто" minlength="2" maxlength="40" required />
         <span class="username-error popup__input-error"></span>
@@ -79,13 +74,13 @@
       </button>
       <h2 class="popup__title">Новое место</h2>
 
-      <form name="add-places" class="popup__form" action="#" method="get" novalidate>
+      <form name="add-places" class="popup__form" novalidate>
         <input type="text" name="placename" id="placename" class="popup__input popup__input_data_name"
-          placeholder="Название" value="" minlength="2" maxlength="30" required />
+          placeholder="Название" minlength="2" maxlength="30" required />
         <span class="placename-error popup__input-error"></span>
 
         <input type="url" name="imagelink" id="imagelink" class="popup__input popup__input_data_operation"
-          placeholder="Ссылка на картинку" value="" required />
+          placeholder="Ссылка на картинку" required />
         <span class="imagelink-error popup__input-error"></span>
 
         <button type="submit" class="popup__submit" aria-label="Создать">
@@ -101,9 +96,9 @@
         <img class="popup__close-image" src="<%=require('./images/Close-Icon.svg')%>" alt="Закрыть меню" />
       </button>
       <h2 class="popup__title">Обновить аватар</h2>
-      <form name="changeAvatar" class="popup__form" action="#" method="get" novalidate>
+      <form name="changeAvatar" class="popup__form" novalidate>
         <input type="url" name="avatar-link" id="avatar-link" class="popup__input popup__input_data_operation"
-          placeholder="Ссылка на картинку" />
+          placeholder="Ссылка на картинку" required />
         <span class="avatar-link-error popup__input-error"></span>
         <button type="submit" class="popup__submit" aria-label="Сохранить">
           Сохранить

@@ -2,44 +2,35 @@ import "../pages/index.css";
 
 import {
   popupAddForm,
-  nameCardInput,
-  linkCardInput,
-  popupSubmitButton,
   profileName,
   profileCaption,
   profileImg,
   placesElements,
-  confirmSubmitButton,
-  confirmForm,
-  editPopup,
   profileFormSubmit,
-  confirmPopup
+  formChangeAvatar,
 } from "./data";
 
-import {
-  addCard,
-  createCard,
-  handleDeleteCardButtonClick,
-  submitDeleteCardAprove
-} from "./card";
+import { addCard, createCard } from "./card";
+
+import { saveInfoPtofile, changeAvatar } from "./profile";
 
 import { closePopup } from "./utils";
 import {
-  editProfile,
+  editProfileInfo,
   openAddCardPopup,
-  saveInfoPtofile,
+  openchangeAvatarPopup,
 } from "./modal";
 
 import { enableValidation } from "./validate.js";
 
-import {
-  fetchGetUserInfo,
-  fetchGetInitialCards
-} from "./api.js";
+import { fetchGetUserInfo, fetchGetInitialCards } from "./api.js";
 
+openchangeAvatarPopup();
 openAddCardPopup();
-editProfile();
-profileFormSubmit.addEventListener("submit", saveInfoPtofile)
+editProfileInfo();
+
+formChangeAvatar.addEventListener("submit", changeAvatar);
+profileFormSubmit.addEventListener("submit", saveInfoPtofile);
 popupAddForm.addEventListener("submit", addCard);
 
 //функция закрытия попапа
@@ -61,7 +52,7 @@ Promise.all([fetchGetUserInfo(), fetchGetInitialCards()])
   .then(([userData, cardsData]) => {
     profileName.textContent = userData.name;
     profileCaption.textContent = userData.about;
-    profileImg.src = userData.avatar; //Добавить разметку
+    profileImg.src = userData.avatar; 
 
     const cards = cardsData.map((card) => createCard(card, userData._id));
     placesElements.prepend(...cards);
@@ -76,8 +67,3 @@ enableValidation({
   inputErrorClass: "popup__input_type_error",
   errorClass: "popup__input-error_active",
 });
-
-
-
-
-

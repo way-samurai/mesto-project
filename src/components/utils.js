@@ -34,11 +34,10 @@ function closeByEscape(evt) {
 //Прорисовка кнопки при выполнения fetch запроса
 export function renderLoading(isLoading, someButton) {
   const ellipsisText = `${someButton.textContent}...`.replace(/\s/g, '');
-   if (isLoading) {
-     someButton.textContent = ellipsisText;
-   } else {
-     const someButonTextContent = someButton.textContent;
-     someButton.textContent = someButonTextContent.slice(0, -3);
-   }
- }
-
+  if (isLoading) {
+    someButton.textContent = ellipsisText;
+  } else {
+    const someButonTextContent = someButton.textContent;
+    someButton.textContent = someButonTextContent.slice(0, -3);
+  }
+}

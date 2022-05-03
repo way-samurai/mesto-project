@@ -9,7 +9,8 @@ const profileInfo = pageContent.querySelector(".profile__info-box");
 
 const profileName = profileInfo.querySelector(".info-box__name");
 const profileCaption = profileInfo.querySelector(".info-box__caption");
-const profileImg = profile.querySelector(".profile__avatar-img")
+const profileAvatarContainer = profile.querySelector(".profile__avatar");
+const profileImg = profile.querySelector(".profile__avatar-img");
 
 //Редактирование
 //Попап редактирования профиля
@@ -33,31 +34,27 @@ const addCardButton = profile.querySelector(".profile__add-button");
 //Форма добавления карточек
 const popupAddForm = addPopup.querySelector(".popup__form");
 //Кнопка сабмита формы добавления карточки
-const popupSubmitButton = popupAddForm.querySelector('.popup__submit');
+const popupSubmitButton = popupAddForm.querySelector(".popup__submit");
 //Поле ввода названия карточки места
 const nameCardInput = addPopup.querySelector(".popup__input_data_name");
 //Поле для ввода ссылки на картинку места
 const linkCardInput = addPopup.querySelector(".popup__input_data_operation");
 
-
 const confirmPopup = document.querySelector("#confirm");
 const confirmForm = confirmPopup.querySelector(".popup__form");
 const confirmSubmitButton = confirmForm.querySelector(".popup__submit");
 
-
-const popupCloseButton = confirmPopup.querySelector(".popup__close") //удалить
+const popupCloseButton = confirmPopup.querySelector(".popup__close"); //удалить
 
 //Попап изменения аватара
 const changeAvatarPopup = document.querySelector("#changeAvatarPopup");
+
 //Форма изменения фото аватара
 const formChangeAvatar = changeAvatarPopup.querySelector(".popup__form");
 //Поле ввода ссылки на картинку аватара
-const linkAvatarInput = formChangeAvatar.querySelector("#avarar-link");
+const linkAvatarInput = document.querySelector("#avatar-link");
 //Кнопка сабмита формы изменения аватара
-const changeAvatarSubmit = formChangeAvatar.querySelector(".popup__submit");
-
-
-
+const changeAvatarSubmit = changeAvatarPopup.querySelector(".popup__submit");
 
 //Открытие изображения
 //Попап открытия изображения
@@ -77,6 +74,7 @@ export {
   profileInfo,
   profileName,
   profileCaption,
+  profileAvatarContainer,
   editPopup,
   profileEditButton,
   profileFormSubmit,
@@ -92,18 +90,14 @@ export {
   popupImageCaption,
   placesElements,
   popupSubmitButton,
-
   changeAvatarPopup,
   formChangeAvatar,
   linkAvatarInput,
   changeAvatarSubmit,
   profileImg,
-
   confirmPopup,
   confirmSubmitButton,
   confirmForm,
   profileSubmitButton,
-
-  popupCloseButton
-
-}
+  popupCloseButton,
+};
