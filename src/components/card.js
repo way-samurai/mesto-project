@@ -35,7 +35,7 @@ function aprovedCardDeletion () {
   confirmSubmitButton.addEventListener("click", submitDeleteCardAprove(cardForDelete));
 }
 
-//прроверить код
+//проверить код
 function handleDeleteCard (cardElement, _id) {
   cardForDelete = { cardElement, _id };
   openPopup(confirmPopup);
