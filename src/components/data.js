@@ -9,7 +9,7 @@ const profileInfo = pageContent.querySelector(".profile__info-box");
 
 const profileName = profileInfo.querySelector(".info-box__name");
 const profileCaption = profileInfo.querySelector(".info-box__caption");
-const profileImg = profile.querySelector(".profile__avatar")
+const profileImg = profile.querySelector(".profile__avatar-img")
 
 //Редактирование
 //Попап редактирования профиля

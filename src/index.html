@@ -17,8 +17,12 @@
   </header>
   <main class="content">
     <section class="profile">
+
+
       <div class="profile__info">
-        <img src=" " alt="Фото профиля" class="profile__avatar" />
+        <button type="button" class="profile__avatar">
+          <img src=" " alt="Фото профиля" class="profile__avatar-img" />
+        </button>
         <div class="profile__info-box info-box">
           <h1 class="info-box__name"></h1>
           <p class="info-box__caption"></p>
@@ -28,6 +32,8 @@
           </button>
         </div>
       </div>
+
+
       <button type="button" class="profile__add-button button-style" aria-label="Добавить карточку">
         <img src="<%=require('./images/add-account-button.svg')%>" class="profile__add-button-icon"
           alt="Добавить карточку" />
