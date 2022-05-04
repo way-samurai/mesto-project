@@ -1,4 +1,4 @@
-import { fetchAddHandleLikes, fetchAddNewCard, fetchDeleteCard } from "./api";
+import { fetchAddHandleLikes, fetchDeleteCard } from "./api";
 
 import { closePopup, openPopup, renderLoading } from "./utils";
 
@@ -9,12 +9,6 @@ import {
   popupImageCaption,
   confirmPopup,
   confirmSubmitButton,
-  popupSubmitButton,
-  linkCardInput,
-  nameCardInput,
-  placesElements,
-  popupAddForm,
-  addPopup,
 } from "./data";
 
 let cardForDelete = null;
@@ -30,9 +24,11 @@ function aprovedCardDeletion() {
   );
 }
 
-//проверить код
 function handleDeleteCard(cardElement, _id) {
-  cardForDelete = { cardElement, _id };
+  cardForDelete = {
+    cardElement,
+    _id,
+  };
   openPopup(confirmPopup);
   confirmSubmitButton.addEventListener("click", aprovedCardDeletion);
 }
@@ -96,23 +92,6 @@ function createCard({ name, link, _id, owner, likes }, myId) {
   return cardElement;
 }
 
-function addCard(evt) {
-  evt.preventDefault();
-  renderLoading(true, popupSubmitButton);
-  fetchAddNewCard(nameCardInput.value, linkCardInput.value)
-    .then((card) => {
-      placesElements.prepend(createCard(card, card.owner._id));
-    })
-    .then(() => {
-      closePopup(addPopup);
-      popupAddForm.reset();
-      popupSubmitButton.classList.add("popup__submit_disabled");
-      popupSubmitButton.disabled = true;
-    })
-    .catch((err) => console.log(err))
-    .finally(() => renderLoading(false, popupSubmitButton));
-}
-
 function submitDeleteCardAprove(cardForDelete) {
   if (!cardForDelete) return;
 
@@ -127,4 +106,4 @@ function submitDeleteCardAprove(cardForDelete) {
     .finally(() => renderLoading(false, confirmSubmitButton));
 }
 
-export { createCard, addCard, submitDeleteCardAprove, aprovedCardDeletion };
+export { createCard, submitDeleteCardAprove, aprovedCardDeletion };

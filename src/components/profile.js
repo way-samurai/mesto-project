@@ -1,4 +1,7 @@
-import { openPopup, closePopup, renderLoading } from "./utils";
+import {
+  closePopup,
+  renderLoading
+} from "./utils";
 import {
   profileName,
   profileCaption,
@@ -8,11 +11,29 @@ import {
   profileSubmitButton,
   changeAvatarSubmit,
   linkAvatarInput,
+  nameCardInput,
+  placesElements,
   profileImg,
   changeAvatarPopup,
+  popupSubmitButton,
+  popupAddForm,
+  linkCardInput,
+  addPopup
 } from "./data";
 
-import { fetchEditUserInfo, fetchEditUserAvatar } from "./api";
+import {
+  fetchEditUserInfo,
+  fetchEditUserAvatar,
+  fetchAddNewCard
+} from "./api";
+
+import {
+  createCard
+} from "./card"
+
+import {
+  userDataFromServer
+} from "./index";
 
 function saveInfoPtofile(evt) {
   evt.preventDefault();
@@ -41,4 +62,26 @@ function changeAvatar(evt) {
     .finally(() => renderLoading(false, changeAvatarSubmit));
 }
 
-export { saveInfoPtofile, changeAvatar };
+function addCard(evt) {
+  evt.preventDefault();
+  renderLoading(true, popupSubmitButton);
+  fetchAddNewCard(nameCardInput.value, linkCardInput.value)
+    .then((card) => {
+      placesElements.prepend(createCard(card, userDataFromServer._id));
+    })
+    .then(() => {
+      closePopup(addPopup);
+      popupAddForm.reset();
+      popupSubmitButton.classList.add("popup__submit_disabled");
+      popupSubmitButton.disabled = true;
+    })
+    .catch((err) => console.log(err))
+    .finally(() => renderLoading(false, popupSubmitButton));
+}
+
+export {
+  saveInfoPtofile,
+  changeAvatar,
+  addCard
+};
+

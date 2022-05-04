@@ -10,11 +10,13 @@ import {
   formChangeAvatar,
 } from "./data";
 
-import { addCard, createCard } from "./card";
+import { createCard } from "./card";
 
-import { saveInfoPtofile, changeAvatar } from "./profile";
+import { saveInfoPtofile, changeAvatar, addCard } from "./profile";
 
-import { closePopup } from "./utils";
+import {
+  closePopupByEscAndClickOverlay
+} from "./utils";
 import {
   editProfileInfo,
   openAddCardPopup,
@@ -24,36 +26,25 @@ import {
 import { enableValidation } from "./validate.js";
 
 import { fetchGetUserInfo, fetchGetInitialCards } from "./api.js";
+import { Promise } from "core-js";
+
+export let userDataFromServer = null;
 
 openchangeAvatarPopup();
 openAddCardPopup();
 editProfileInfo();
+closePopupByEscAndClickOverlay();
 
 formChangeAvatar.addEventListener("submit", changeAvatar);
 profileFormSubmit.addEventListener("submit", saveInfoPtofile);
 popupAddForm.addEventListener("submit", addCard);
 
-//функция закрытия попапа
-const popups = document.querySelectorAll(".popup");
-popups.forEach((popup) => {
-  popup.addEventListener("mousedown", (evt) => {
-    if (evt.target.classList.contains("popup_opened")) {
-      closePopup(popup);
-    }
-  });
-  popup.addEventListener("click", (evt) => {
-    if (evt.target.closest(".popup__close")) {
-      closePopup(popup);
-    }
-  });
-});
-
 Promise.all([fetchGetUserInfo(), fetchGetInitialCards()])
   .then(([userData, cardsData]) => {
+    userDataFromServer = userData;
     profileName.textContent = userData.name;
     profileCaption.textContent = userData.about;
-    profileImg.src = userData.avatar; 
-
+    profileImg.src = userData.avatar;
     const cards = cardsData.map((card) => createCard(card, userData._id));
     placesElements.prepend(...cards);
   })
@@ -67,3 +58,4 @@ enableValidation({
   inputErrorClass: "popup__input_type_error",
   errorClass: "popup__input-error_active",
 });
+

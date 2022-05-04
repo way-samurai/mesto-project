@@ -1,6 +1,7 @@
 import {
   confirmPopup,
   confirmSubmitButton,
+  popupSubmitButton
 } from "./data";
 
 import {
@@ -33,11 +34,31 @@ function closeByEscape(evt) {
 
 //Прорисовка кнопки при выполнения fetch запроса
 export function renderLoading(isLoading, someButton) {
-  const ellipsisText = `${someButton.textContent}...`.replace(/\s/g, '');
   if (isLoading) {
-    someButton.textContent = ellipsisText;
+    someButton.textContent = "Сохранение...";
+  } else if (someButton === popupSubmitButton) {
+    someButton.textContent = "Создать";
+  } else if (someButton === confirmSubmitButton) {
+    someButton.textContent = "Да";
   } else {
-    const someButonTextContent = someButton.textContent;
-    someButton.textContent = someButonTextContent.slice(0, -3);
+    someButton.textContent = "Сохранить";
   }
 }
+
+//функция закрытия попапа разными способами
+export function closePopupByEscAndClickOverlay () {
+  const popups = document.querySelectorAll(".popup");
+  popups.forEach((popup) => {
+    popup.addEventListener("mousedown", (evt) => {
+      if (evt.target.classList.contains("popup_opened")) {
+        closePopup(popup);
+      }
+    });
+    popup.addEventListener("click", (evt) => {
+      if (evt.target.closest(".popup__close")) {
+        closePopup(popup);
+      }
+    });
+  });
+}
+
