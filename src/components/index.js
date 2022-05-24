@@ -10,23 +10,37 @@ import {
   formChangeAvatar,
 } from "./data";
 
-import { createCard, addCard } from "./card";
+import {
+  createCard,
+  addCard
+} from "./card";
 
-import { saveInfoPtofile, changeAvatar } from "./profile";
+import {
+  saveInfoPtofile,
+  changeAvatar
+} from "./profile";
 
 import {
   closePopupByEscAndClickOverlay
 } from "./utils";
+
 import {
   editProfileInfo,
   openAddCardPopup,
   openchangeAvatarPopup,
 } from "./modal";
 
-import { enableValidation } from "./validate.js";
+import {
+  enableValidation
+} from "./validate.js";
 
-import { getUserInfo, getInitialCards } from "./api.js";
-import { Promise } from "core-js";
+import {
+  getUserInfo,
+  getInitialCards
+} from "./api.js";
+import {
+  Promise
+} from "core-js";
 
 export let userDataFromServer = null;
 
@@ -58,4 +72,3 @@ enableValidation({
   inputErrorClass: "popup__input_type_error",
   errorClass: "popup__input-error_active",
 });
-

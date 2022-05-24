@@ -2,6 +2,7 @@ import {
   closePopup,
   renderLoading
 } from "./utils";
+
 import {
   profileName,
   profileCaption,
@@ -53,4 +54,3 @@ export {
   saveInfoPtofile,
   changeAvatar
 };
-

@@ -29,7 +29,7 @@ export function renderLoading(isLoading, button, buttonText = 'Сохранит�
 }
 
 //функция закрытия попапа разными способами
-export function closePopupByEscAndClickOverlay () {
+export function closePopupByEscAndClickOverlay() {
   const popups = document.querySelectorAll(".popup");
   popups.forEach((popup) => {
     popup.addEventListener("mousedown", (evt) => {
@@ -50,4 +50,3 @@ export function deactivatingButton(button) {
   button.classList.add("popup__submit_disabled");
   button.disabled = true;
 }
-

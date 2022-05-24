@@ -1,4 +1,7 @@
-import { openPopup, deactivatingButton } from "./utils";
+import {
+  openPopup,
+  deactivatingButton
+} from "./utils";
 
 import {
   profileName,
@@ -40,4 +43,8 @@ function openchangeAvatarPopup() {
   });
 }
 
-export { editProfileInfo, openAddCardPopup, openchangeAvatarPopup };
+export {
+  editProfileInfo,
+  openAddCardPopup,
+  openchangeAvatarPopup
+};

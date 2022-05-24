@@ -1,6 +1,15 @@
-import { addHandleLikes, deleteCard, addNewCard } from "./api";
+import {
+  addHandleLikes,
+  deleteCard,
+  addNewCard
+} from "./api";
 
-import { closePopup, openPopup, renderLoading, deactivatingButton } from "./utils";
+import {
+  closePopup,
+  openPopup,
+  renderLoading,
+  deactivatingButton
+} from "./utils";
 
 import {
   cardTemplate,
@@ -40,7 +49,13 @@ function handleDeleteCard(cardElement, _id) {
 }
 
 //Добавление карточек
-function createCard({ name, link, _id, owner, likes }, myId) {
+function createCard({
+  name,
+  link,
+  _id,
+  owner,
+  likes
+}, myId) {
   const cardElement = cloneTemplate();
   const cardTitle = cardElement.querySelector(".place__title");
   const cardImage = cardElement.querySelector(".place__image");
@@ -133,6 +148,3 @@ export {
   submitDeleteCardAprove,
   addCard
 };
-
-
-

@@ -44,7 +44,7 @@ const confirmPopup = document.querySelector("#confirm");
 const confirmForm = confirmPopup.querySelector(".popup__form");
 const confirmSubmitButton = confirmForm.querySelector(".popup__submit");
 
-const popupCloseButton = confirmPopup.querySelector(".popup__close"); 
+const popupCloseButton = confirmPopup.querySelector(".popup__close");
 
 //Попап изменения аватара
 const changeAvatarPopup = document.querySelector("#changeAvatarPopup");
