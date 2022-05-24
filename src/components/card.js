@@ -1,4 +1,4 @@
-import { addHandleLikes, deleteCard } from "./api";
+import { addHandleLikes, deleteCard, addNewCard } from "./api";
 
 import { closePopup, openPopup, renderLoading } from "./utils";
 
@@ -9,7 +9,17 @@ import {
   popupImageCaption,
   confirmPopup,
   confirmSubmitButton,
+  popupSubmitButton,
+  nameCardInput,
+  linkCardInput,
+  placesElements,
+  popupAddForm,
+  addPopup
 } from "./data";
+
+import {
+  userDataFromServer
+} from "./index";
 
 let cardForDelete = null;
 
@@ -17,12 +27,9 @@ const cloneTemplate = () => {
   return cardTemplate.querySelector(".place").cloneNode(true);
 };
 
-function aprovedCardDeletion() {
-  confirmSubmitButton.addEventListener(
-    "click",
-    submitDeleteCardAprove(cardForDelete)
-  );
-}
+confirmSubmitButton.addEventListener("click", () => {
+  submitDeleteCardAprove(cardForDelete);
+})
 
 function handleDeleteCard(cardElement, _id) {
   cardForDelete = {
@@ -30,7 +37,6 @@ function handleDeleteCard(cardElement, _id) {
     _id,
   };
   openPopup(confirmPopup);
-  confirmSubmitButton.addEventListener("click", aprovedCardDeletion);
 }
 
 //Добавление карточек
@@ -92,10 +98,27 @@ function createCard({ name, link, _id, owner, likes }, myId) {
   return cardElement;
 }
 
+function addCard(evt) {
+  evt.preventDefault();
+  renderLoading(true, popupSubmitButton, "Создать");
+  addNewCard(nameCardInput.value, linkCardInput.value)
+    .then((card) => {
+      placesElements.prepend(createCard(card, userDataFromServer._id));
+    })
+    .then(() => {
+      closePopup(addPopup);
+      popupAddForm.reset();
+      popupSubmitButton.classList.add("popup__submit_disabled");
+      popupSubmitButton.disabled = true;
+    })
+    .catch((err) => console.log(err))
+    .finally(() => renderLoading(false, popupSubmitButton, "Создать"));
+}
+
 function submitDeleteCardAprove(cardForDelete) {
   if (!cardForDelete) return;
 
-  renderLoading(true, confirmSubmitButton);
+  renderLoading(true, confirmSubmitButton, 'Да');
   deleteCard(cardForDelete._id)
     .then(() => {
       cardForDelete.cardElement.remove();
@@ -103,10 +126,14 @@ function submitDeleteCardAprove(cardForDelete) {
       cardForDelete = null;
     })
     .catch((err) => console.log(err))
-    .finally(() => renderLoading(false, confirmSubmitButton));
+    .finally(() => renderLoading(false, confirmSubmitButton, 'Да'));
 }
 
-export { createCard, submitDeleteCardAprove, aprovedCardDeletion };
+export {
+  createCard,
+  submitDeleteCardAprove,
+  addCard
+};
 
 
 

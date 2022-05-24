@@ -62,26 +62,10 @@ function changeAvatar(evt) {
     .finally(() => renderLoading(false, changeAvatarSubmit));
 }
 
-function addCard(evt) {
-  evt.preventDefault();
-  renderLoading(true, popupSubmitButton);
-  addNewCard(nameCardInput.value, linkCardInput.value)
-    .then((card) => {
-      placesElements.prepend(createCard(card, userDataFromServer._id));
-    })
-    .then(() => {
-      closePopup(addPopup);
-      popupAddForm.reset();
-      popupSubmitButton.classList.add("popup__submit_disabled");
-      popupSubmitButton.disabled = true;
-    })
-    .catch((err) => console.log(err))
-    .finally(() => renderLoading(false, popupSubmitButton));
-}
+
 
 export {
   saveInfoPtofile,
-  changeAvatar,
-  addCard
+  changeAvatar
 };
 

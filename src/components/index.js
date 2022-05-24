@@ -10,9 +10,9 @@ import {
   formChangeAvatar,
 } from "./data";
 
-import { createCard } from "./card";
+import { createCard, addCard } from "./card";
 
-import { saveInfoPtofile, changeAvatar, addCard } from "./profile";
+import { saveInfoPtofile, changeAvatar } from "./profile";
 
 import {
   closePopupByEscAndClickOverlay

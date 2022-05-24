@@ -1,13 +1,3 @@
-import {
-  confirmPopup,
-  confirmSubmitButton,
-  popupSubmitButton
-} from "./data";
-
-import {
-  aprovedCardDeletion
-} from "./card";
-
 //функция открытия модального окна
 export function openPopup(popup) {
   popup.classList.add("popup_opened");
@@ -18,10 +8,6 @@ export function openPopup(popup) {
 export function closePopup(popup) {
   popup.classList.remove("popup_opened");
   document.removeEventListener("keydown", closeByEscape);
-
-  if (popup === confirmPopup) {
-    confirmSubmitButton.removeEventListener("click", aprovedCardDeletion);
-  }
 }
 
 //UPP Функция закрытия модального окна клавишей esc
@@ -32,16 +18,13 @@ function closeByEscape(evt) {
   }
 }
 
-//Прорисовка кнопки при выполнения fetch запроса
-export function renderLoading(isLoading, someButton) {
+
+//Изменение текста кнопки самбит
+export function renderLoading(isLoading, button, buttonText = 'Сохранить') {
   if (isLoading) {
-    someButton.textContent = "Сохранение...";
-  } else if (someButton === popupSubmitButton) {
-    someButton.textContent = "Создать";
-  } else if (someButton === confirmSubmitButton) {
-    someButton.textContent = "Да";
+    button.textContent = 'Сохранение...';
   } else {
-    someButton.textContent = "Сохранить";
+    button.textContent = buttonText;
   }
 }
 
