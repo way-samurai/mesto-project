@@ -1,4 +1,4 @@
-import { fetchAddHandleLikes, fetchDeleteCard } from "./api";
+import { addHandleLikes, deleteCard } from "./api";
 
 import { closePopup, openPopup, renderLoading } from "./utils";
 
@@ -76,7 +76,7 @@ function createCard({ name, link, _id, owner, likes }, myId) {
   cardLikeButton.addEventListener("click", function handleLikes() {
     const myLike = likes.find((like) => like._id === myId);
     const method = myLike !== undefined ? "DELETE" : "PUT";
-    fetchAddHandleLikes(_id, method)
+    addHandleLikes(_id, method)
       .then((data) => {
         likes = data.likes;
         cardLikesCounter.textContent = `${likes.length}`;
@@ -96,7 +96,7 @@ function submitDeleteCardAprove(cardForDelete) {
   if (!cardForDelete) return;
 
   renderLoading(true, confirmSubmitButton);
-  fetchDeleteCard(cardForDelete._id)
+  deleteCard(cardForDelete._id)
     .then(() => {
       cardForDelete.cardElement.remove();
       closePopup(confirmPopup);
@@ -107,3 +107,6 @@ function submitDeleteCardAprove(cardForDelete) {
 }
 
 export { createCard, submitDeleteCardAprove, aprovedCardDeletion };
+
+
+

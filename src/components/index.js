@@ -25,7 +25,7 @@ import {
 
 import { enableValidation } from "./validate.js";
 
-import { fetchGetUserInfo, fetchGetInitialCards } from "./api.js";
+import { getUserInfo, getInitialCards } from "./api.js";
 import { Promise } from "core-js";
 
 export let userDataFromServer = null;
@@ -39,7 +39,7 @@ formChangeAvatar.addEventListener("submit", changeAvatar);
 profileFormSubmit.addEventListener("submit", saveInfoPtofile);
 popupAddForm.addEventListener("submit", addCard);
 
-Promise.all([fetchGetUserInfo(), fetchGetInitialCards()])
+Promise.all([getUserInfo(), getInitialCards()])
   .then(([userData, cardsData]) => {
     userDataFromServer = userData;
     profileName.textContent = userData.name;

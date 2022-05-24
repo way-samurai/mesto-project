@@ -18,7 +18,7 @@ const onResponce = function (res) {
 };
 
 //Запрос данных пользователя
-export const fetchGetUserInfo = () => {
+export const getUserInfo = () => {
   return fetch(`${config.baseUrl}/users/me`, {
     method: "GET",
     headers: config.headers,
@@ -26,7 +26,7 @@ export const fetchGetUserInfo = () => {
 };
 
 //Изменение данных пользователя
-export const fetchEditUserInfo = (userName, userInfo) => {
+export const editUserInfo = (userName, userInfo) => {
   return fetch(`${config.baseUrl}/users/me`, {
     method: "PATCH",
     headers: config.headers,
@@ -38,7 +38,7 @@ export const fetchEditUserInfo = (userName, userInfo) => {
 };
 
 //Запрос изначальных карточек
-export const fetchGetInitialCards = () => {
+export const getInitialCards = () => {
   return fetch(`${config.baseUrl}/cards`, {
     method: "GET",
     headers: config.headers,
@@ -46,7 +46,7 @@ export const fetchGetInitialCards = () => {
 };
 
 //Добавление новой карточки
-export const fetchAddNewCard = (placeName, imageLink) => {
+export const addNewCard = (placeName, imageLink) => {
   return fetch(`${config.baseUrl}/cards`, {
     method: "POST",
     headers: config.headers,
@@ -58,7 +58,7 @@ export const fetchAddNewCard = (placeName, imageLink) => {
 };
 
 //Лайки
-export const fetchAddHandleLikes = (id, method) => {
+export const addHandleLikes = (id, method) => {
   return fetch(`${config.baseUrl}/cards/likes/${id}`, {
     method: method,
     headers: config.headers,
@@ -66,7 +66,7 @@ export const fetchAddHandleLikes = (id, method) => {
 };
 
 //Удаление карточки
-export const fetchDeleteCard = (id) => {
+export const deleteCard = (id) => {
   return fetch(`${config.baseUrl}/cards/${id}`, {
     method: "DELETE",
     headers: config.headers,
@@ -74,7 +74,7 @@ export const fetchDeleteCard = (id) => {
 };
 
 //Изменение аватара
-export const fetchEditUserAvatar = (link) => {
+export const editUserAvatar = (link) => {
   return fetch(`${config.baseUrl}/users/me/avatar`, {
     method: "PATCH",
     headers: config.headers,

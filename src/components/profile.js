@@ -22,9 +22,9 @@ import {
 } from "./data";
 
 import {
-  fetchEditUserInfo,
-  fetchEditUserAvatar,
-  fetchAddNewCard
+  editUserInfo,
+  editUserAvatar,
+  addNewCard
 } from "./api";
 
 import {
@@ -38,7 +38,7 @@ import {
 function saveInfoPtofile(evt) {
   evt.preventDefault();
   renderLoading(true, profileSubmitButton);
-  fetchEditUserInfo(nameInput.value, operationInput.value)
+  editUserInfo(nameInput.value, operationInput.value)
     .then(() => {
       profileName.textContent = nameInput.value;
       profileCaption.textContent = operationInput.value;
@@ -51,7 +51,7 @@ function saveInfoPtofile(evt) {
 function changeAvatar(evt) {
   evt.preventDefault();
   renderLoading(true, changeAvatarSubmit);
-  fetchEditUserAvatar(linkAvatarInput.value)
+  editUserAvatar(linkAvatarInput.value)
     .then((data) => {
       profileImg.src = data.avatar;
       closePopup(changeAvatarPopup);
@@ -65,7 +65,7 @@ function changeAvatar(evt) {
 function addCard(evt) {
   evt.preventDefault();
   renderLoading(true, popupSubmitButton);
-  fetchAddNewCard(nameCardInput.value, linkCardInput.value)
+  addNewCard(nameCardInput.value, linkCardInput.value)
     .then((card) => {
       placesElements.prepend(createCard(card, userDataFromServer._id));
     })
