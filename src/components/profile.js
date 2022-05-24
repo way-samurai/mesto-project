@@ -2,7 +2,6 @@ import {
   closePopup,
   renderLoading
 } from "./utils";
-
 import {
   profileName,
   profileCaption,

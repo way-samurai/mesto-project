@@ -12,12 +12,11 @@ import {
 
 import { createCard, addCard } from "./card";
 
-import { saveInfoPtofile, changeAvatar } from "./profile";
+import { saveInfoPtofile, changeAvatar, addCard } from "./profile";
 
 import {
   closePopupByEscAndClickOverlay
 } from "./utils";
-
 import {
   editProfileInfo,
   openAddCardPopup,
