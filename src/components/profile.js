@@ -2,6 +2,7 @@ import {
   closePopup,
   renderLoading
 } from "./utils";
+
 import {
   profileName,
   profileCaption,
@@ -11,29 +12,14 @@ import {
   profileSubmitButton,
   changeAvatarSubmit,
   linkAvatarInput,
-  nameCardInput,
-  placesElements,
   profileImg,
-  changeAvatarPopup,
-  popupSubmitButton,
-  popupAddForm,
-  linkCardInput,
-  addPopup
+  changeAvatarPopup
 } from "./data";
 
 import {
   editUserInfo,
-  editUserAvatar,
-  addNewCard
+  editUserAvatar
 } from "./api";
-
-import {
-  createCard
-} from "./card"
-
-import {
-  userDataFromServer
-} from "./index";
 
 function saveInfoPtofile(evt) {
   evt.preventDefault();

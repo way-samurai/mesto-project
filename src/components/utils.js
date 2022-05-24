@@ -45,3 +45,9 @@ export function closePopupByEscAndClickOverlay () {
   });
 }
 
+//Функция деактивация сабмита попапов
+export function deactivatingButton(button) {
+  button.classList.add("popup__submit_disabled");
+  button.disabled = true;
+}
+

@@ -1,4 +1,5 @@
-import { openPopup } from "./utils";
+import { openPopup, deactivatingButton } from "./utils";
+
 import {
   profileName,
   profileCaption,
@@ -20,8 +21,7 @@ function editProfileInfo() {
     nameInput.value = profileName.textContent;
     operationInput.value = profileCaption.textContent;
     openPopup(editPopup);
-    profileSubmitButton.disabled = true;
-    profileSubmitButton.classList.add("popup__submit_disabled");
+    deactivatingButton(profileSubmitButton);
   });
 }
 
@@ -36,8 +36,7 @@ function openchangeAvatarPopup() {
   //Слушатель на кнопке аватара
   profileAvatarContainer.addEventListener("click", function () {
     openPopup(changeAvatarPopup);
-    changeAvatarSubmit.disabled = true;
-    changeAvatarSubmit.classList.add("popup__submit_disabled");
+    deactivatingButton(changeAvatarSubmit);
   });
 }
 

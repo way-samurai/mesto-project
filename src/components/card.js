@@ -1,6 +1,6 @@
 import { addHandleLikes, deleteCard, addNewCard } from "./api";
 
-import { closePopup, openPopup, renderLoading } from "./utils";
+import { closePopup, openPopup, renderLoading, deactivatingButton } from "./utils";
 
 import {
   cardTemplate,
@@ -108,8 +108,7 @@ function addCard(evt) {
     .then(() => {
       closePopup(addPopup);
       popupAddForm.reset();
-      popupSubmitButton.classList.add("popup__submit_disabled");
-      popupSubmitButton.disabled = true;
+      deactivatingButton(popupSubmitButton);
     })
     .catch((err) => console.log(err))
     .finally(() => renderLoading(false, popupSubmitButton, "Создать"));
