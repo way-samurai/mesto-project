@@ -17,7 +17,6 @@ import { saveInfoPtofile, changeAvatar } from "./profile";
 import {
   closePopupByEscAndClickOverlay
 } from "./utils";
-
 import {
   editProfileInfo,
   openAddCardPopup,
