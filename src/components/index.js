@@ -27,16 +27,14 @@ import {
 import {
   editProfileInfo,
   openAddCardPopup,
-  openchangeAvatarPopup,
+  openChangeAvatarPopup,
 } from "./modal";
 
 import {
   enableValidation
 } from "./validate.js";
 
-import {
-  getUserInfo,
-  getInitialCards
+import { Api
 } from "./api.js";
 import {
   Promise
@@ -44,22 +42,32 @@ import {
 
 export let userDataFromServer = null;
 
-openchangeAvatarPopup();
+openChangeAvatarPopup();
 openAddCardPopup();
 editProfileInfo();
 closePopupByEscAndClickOverlay();
+//Создание экземпляра класса Api
+export const api = new Api({
+  baseUrl: "https://nomoreparties.co/v1/plus-cohort-9",
+  headers: {
+    authorization: "3e17db6a-6951-46bf-9280-ebc36e39e39a",
+    "Content-Type": "application/json"
+  },
+});
 
-formChangeAvatar.addEventListener("submit", changeAvatar);
-profileFormSubmit.addEventListener("submit", saveInfoPtofile);
-popupAddForm.addEventListener("submit", addCard);
 
-Promise.all([getUserInfo(), getInitialCards()])
+formChangeAvatar.addEventListener("submit", (evt) =>  changeAvatar(evt,api));
+profileFormSubmit.addEventListener("submit",(evt) =>  saveInfoPtofile(evt,api));
+popupAddForm.addEventListener("submit",(evt) => addCard(evt,api));
+
+
+Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([userData, cardsData]) => {
     userDataFromServer = userData;
     profileName.textContent = userData.name;
     profileCaption.textContent = userData.about;
     profileImg.src = userData.avatar;
-    const cards = cardsData.map((card) => createCard(card, userData._id));
+    const cards = cardsData.map((card) => createCard(card, userData._id, api));
     placesElements.prepend(...cards);
   })
   .catch((err) => console.log(err));

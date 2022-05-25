@@ -16,15 +16,10 @@ import {
   changeAvatarPopup
 } from "./data";
 
-import {
-  editUserInfo,
-  editUserAvatar
-} from "./api";
-
-function saveInfoPtofile(evt) {
+function saveInfoPtofile(evt, api) {
   evt.preventDefault();
   renderLoading(true, profileSubmitButton);
-  editUserInfo(nameInput.value, operationInput.value)
+  api.editUserInfo(nameInput.value, operationInput.value)
     .then(() => {
       profileName.textContent = nameInput.value;
       profileCaption.textContent = operationInput.value;
@@ -34,10 +29,10 @@ function saveInfoPtofile(evt) {
     .finally(() => renderLoading(false, profileSubmitButton));
 }
 
-function changeAvatar(evt) {
+function changeAvatar(evt, api) {
   evt.preventDefault();
   renderLoading(true, changeAvatarSubmit);
-  editUserAvatar(linkAvatarInput.value)
+  api.editUserAvatar(linkAvatarInput.value)
     .then((data) => {
       profileImg.src = data.avatar;
       closePopup(changeAvatarPopup);

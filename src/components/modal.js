@@ -35,7 +35,7 @@ function openAddCardPopup() {
   });
 }
 
-function openchangeAvatarPopup() {
+function openChangeAvatarPopup() {
   //Слушатель на кнопке аватара
   profileAvatarContainer.addEventListener("click", function () {
     openPopup(changeAvatarPopup);
@@ -46,5 +46,5 @@ function openchangeAvatarPopup() {
 export {
   editProfileInfo,
   openAddCardPopup,
-  openchangeAvatarPopup
+  openChangeAvatarPopup
 };
