@@ -1,8 +1,3 @@
-import {
-  addHandleLikes,
-  deleteCard,
-  addNewCard
-} from "./api";
 
 import {
   closePopup,
@@ -27,7 +22,8 @@ import {
 } from "./data";
 
 import {
-  userDataFromServer
+  userDataFromServer,
+  api
 } from "./index";
 
 let cardForDelete = null;
@@ -37,7 +33,7 @@ const cloneTemplate = () => {
 };
 
 confirmSubmitButton.addEventListener("click", () => {
-  submitDeleteCardAprove(cardForDelete);
+  submitDeleteCardAprove(cardForDelete, api );
 })
 
 function handleDeleteCard(cardElement, _id) {
@@ -55,7 +51,7 @@ function createCard({
   _id,
   owner,
   likes
-}, myId) {
+}, myId,api) {
   const cardElement = cloneTemplate();
   const cardTitle = cardElement.querySelector(".place__title");
   const cardImage = cardElement.querySelector(".place__image");
@@ -97,7 +93,7 @@ function createCard({
   cardLikeButton.addEventListener("click", function handleLikes() {
     const myLike = likes.find((like) => like._id === myId);
     const method = myLike !== undefined ? "DELETE" : "PUT";
-    addHandleLikes(_id, method)
+    api.addHandleLikes(_id, method)
       .then((data) => {
         likes = data.likes;
         cardLikesCounter.textContent = `${likes.length}`;
@@ -113,12 +109,12 @@ function createCard({
   return cardElement;
 }
 
-function addCard(evt) {
+function addCard(evt, api) {
   evt.preventDefault();
   renderLoading(true, popupSubmitButton, "Создать");
-  addNewCard(nameCardInput.value, linkCardInput.value)
+  api.addNewCard(nameCardInput.value, linkCardInput.value)
     .then((card) => {
-      placesElements.prepend(createCard(card, userDataFromServer._id));
+      placesElements.prepend(createCard(card, userDataFromServer._id, api));
     })
     .then(() => {
       closePopup(addPopup);
@@ -129,11 +125,11 @@ function addCard(evt) {
     .finally(() => renderLoading(false, popupSubmitButton, "Создать"));
 }
 
-function submitDeleteCardAprove(cardForDelete) {
+function submitDeleteCardAprove(cardForDelete, api) {
   if (!cardForDelete) return;
 
   renderLoading(true, confirmSubmitButton, 'Да');
-  deleteCard(cardForDelete._id)
+  api.deleteCard(cardForDelete._id)
     .then(() => {
       cardForDelete.cardElement.remove();
       closePopup(confirmPopup);
