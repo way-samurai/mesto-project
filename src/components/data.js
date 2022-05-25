@@ -66,6 +66,14 @@ const popupImageCaption = openImage.querySelector(".popup__image-caption");
 
 //Секция в которую вставляем карточки
 const placesElements = pageContent.querySelector(".elements");
+const settings = {
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__input-error_active",
+  inactiveButtonClass: "popup__submit_disabled",
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__submit",
+};
 
 export {
   pageContent,
@@ -100,4 +108,5 @@ export {
   confirmForm,
   profileSubmitButton,
   popupCloseButton,
+  settings
 };
