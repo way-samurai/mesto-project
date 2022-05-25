@@ -8,6 +8,7 @@ import {
   placesElements,
   profileFormSubmit,
   formChangeAvatar,
+  settings
 } from "./data";
 
 import {
@@ -30,9 +31,6 @@ import {
   openChangeAvatarPopup,
 } from "./modal";
 
-import {
-  enableValidation
-} from "./validate.js";
 
 import { Api
 } from "./api.js";
@@ -40,12 +38,27 @@ import {
   Promise
 } from "core-js";
 
+import FormValidator from "./FormValidator.js";
+
+//Валидация редактирования профиля
+const editProfileValidator = new FormValidator(profileFormSubmit, settings);
+editProfileValidator.enableValidation();
+
+//Валидация редактирования аватара
+const editCreateAvatarValidator = new FormValidator(formChangeAvatar, settings);
+editCreateAvatarValidator.enableValidation();
+
+//Валидация добавления карточки
+const addCardFormValidator = new FormValidator(popupAddForm, settings);
+addCardFormValidator.enableValidation();
+
 export let userDataFromServer = null;
 
 openChangeAvatarPopup();
 openAddCardPopup();
 editProfileInfo();
 closePopupByEscAndClickOverlay();
+
 //Создание экземпляра класса Api
 export const api = new Api({
   baseUrl: "https://nomoreparties.co/v1/plus-cohort-9",
@@ -72,11 +85,3 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
   })
   .catch((err) => console.log(err));
 
-enableValidation({
-  formSelector: ".popup__form",
-  inputSelector: ".popup__input",
-  submitButtonSelector: ".popup__submit",
-  inactiveButtonClass: "popup__submit_disabled",
-  inputErrorClass: "popup__input_type_error",
-  errorClass: "popup__input-error_active",
-});
