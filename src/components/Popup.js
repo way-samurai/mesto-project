@@ -1,21 +1,8 @@
 import {
-  addCardButton, addPopup, changeAvatarPopup, changeAvatarSubmit, confirmPopup,
-  editPopup,
-  nameInput, openImage,
-  operationInput, profileAvatarContainer,
-  profileCaption,
-  profileEditButton,
-  profileName,
-  profileSubmitButton
-} from "./data";
-import {deactivatingButton} from "./utils";
+  addPopup, changeAvatarPopup, confirmPopup, editPopup, openImage
 
-export let editPopupObject = new Popup(editPopup)
-export let addPopupObject = new Popup(addPopup)
-export let changeAvatarPopupObject = new Popup(changeAvatarPopup)
-export let confirmPopupObject = new Popup(confirmPopup)
-export let openImageObject = new Popup(openImage)
-export let popupObjects = document.querySelectorAll(".popup").map((popup) => new Popup(popup));
+} from "./data";
+
 
 export class Popup {
   constructor(popupSelector) {
@@ -25,14 +12,14 @@ export class Popup {
 
   //функция открытия модального окна
   openPopup() {
-    // popup.classList.add("popup_opened");
-    // document.addEventListener("keydown", this._closeByEscape);
+    this._popupSelector.classList.add("popup_opened");
+    document.addEventListener("keydown", this._closeByEscape);
   }
 
 //Функция закрытия модального окна
   closePopup() {
-    // popup.classList.remove("popup_opened");
-    // document.removeEventListener("keydown", this._closeByEscape);
+    this._popupSelector.classList.remove("popup_opened");
+    document.removeEventListener("keydown", this._closeByEscape);
   }
 
 //UPP Функция закрытия модального окна клавишей esc
@@ -45,15 +32,22 @@ export class Popup {
 
   //функция закрытия попапа разными способами
   closePopupByEscAndClickOverlay() {
-      // popup.addEventListener("mousedown", (evt) => {
-      //   if (evt.target.classList.contains("popup_opened")) {
-      //     this.closePopup(popup);
-      //   }
-      // });
-      // popup.addEventListener("click", (evt) => {
-      //   if (evt.target.closest(".popup__close")) {
-      //     this.closePopup(popup);
-      //   }
-      // });
+    this._popupSelector.addEventListener("mousedown", (evt) => {
+      if (evt.target.classList.contains("popup_opened")) {
+        this.closePopup(this._popupSelector);
+      }
+    });
+    this._popupSelector.addEventListener("click", (evt) => {
+      if (evt.target.closest(".popup__close")) {
+        this.closePopup(this._popupSelector);
+      }
+    });
   }
 }
+
+export let editPopupObject = new Popup(editPopup)
+export let addPopupObject = new Popup(addPopup)
+export let changeAvatarPopupObject = new Popup(changeAvatarPopup)
+export let confirmPopupObject = new Popup(confirmPopup)
+export let openImageObject = new Popup(openImage)
+export let popupObjects = Array.from(document.querySelectorAll(".popup")).map((popup) => new Popup(popup));
