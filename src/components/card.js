@@ -1,7 +1,5 @@
 
 import {
-  closePopup,
-  openPopup,
   renderLoading,
   deactivatingButton
 } from "./utils";
@@ -25,6 +23,7 @@ import {
   userDataFromServer,
   api
 } from "./index";
+import {addPopupObject, confirmPopupObject, openImageObject} from "./Popup";
 
 let cardForDelete = null;
 
@@ -41,7 +40,7 @@ function handleDeleteCard(cardElement, _id) {
     cardElement,
     _id,
   };
-  openPopup(confirmPopup);
+  confirmPopupObject.openPopup();
 }
 
 //Добавление карточек
@@ -87,7 +86,7 @@ function createCard({
     popupImage.src = cardImage.src;
     popupImage.alt = name;
     popupImageCaption.textContent = name;
-    openPopup(openImage);
+    openImageObject.openPopup();
   });
 
   cardLikeButton.addEventListener("click", function handleLikes() {
@@ -117,7 +116,7 @@ function addCard(evt, api) {
       placesElements.prepend(createCard(card, userDataFromServer._id, api));
     })
     .then(() => {
-      closePopup(addPopup);
+      addPopupObject.closePopup();
       popupAddForm.reset();
       deactivatingButton(popupSubmitButton);
     })
@@ -132,7 +131,7 @@ function submitDeleteCardAprove(cardForDelete, api) {
   api.deleteCard(cardForDelete._id)
     .then(() => {
       cardForDelete.cardElement.remove();
-      closePopup(confirmPopup);
+      confirmPopupObject.closePopup();
       cardForDelete = null;
     })
     .catch((err) => console.log(err))
