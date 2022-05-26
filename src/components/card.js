@@ -33,9 +33,8 @@ let cardForDelete = null;
 const cloneTemplate = () => {
   return cardTemplate.querySelector(".place").cloneNode(true);
 };
-
+const objectConfirm = new PopupConfirmDeleteCard(confirmPopup, cardForDelete, api )
 confirmSubmitButton.addEventListener("click", () => {
-  const objectConfirm = new PopupConfirmDeleteCard(confirmPopup, cardForDelete, api )
   objectConfirm.submitDeleteCardAprove();
 })
 
