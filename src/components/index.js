@@ -21,9 +21,6 @@ import {
   changeAvatar
 } from "./profile";
 
-import {
-  closePopupByEscAndClickOverlay
-} from "./utils";
 
 import {
   editProfileInfo,
@@ -40,7 +37,10 @@ import {
 } from "core-js";
 
 
+import {popupObjects} from "./Popup"
+
 import UserInfo from "./UserInfo";
+
 
 import FormValidator from "./FormValidator.js";
 
@@ -61,7 +61,7 @@ export let userDataFromServer = null;
 openChangeAvatarPopup();
 openAddCardPopup();
 editProfileInfo();
-closePopupByEscAndClickOverlay();
+popupObjects.forEach((popup) => popup.closePopupByEscAndClickOverlay())
 
 //Создание экземпляра класса Api
 export const api = new Api({
