@@ -31,11 +31,17 @@ import {
 
 import { Api
 } from "./api.js";
+
 import {
   Promise
 } from "core-js";
 
+
 import {popupObjects} from "./Popup"
+
+import UserInfo from "./UserInfo";
+
+
 import FormValidator from "./FormValidator.js";
 
 //Валидация редактирования профиля
@@ -66,6 +72,12 @@ export const api = new Api({
   },
 });
 
+//Создание экземпляра класса UserInfo
+export const userInfo = new UserInfo({
+  nameInput: ".info-box__name",
+  aboutInput: ".info-box__caption",
+  avatarLink: ".profile__avatar-img"
+})
 
 formChangeAvatar.addEventListener("submit", (evt) =>  changeAvatar(evt,api));
 profileFormSubmit.addEventListener("submit",(evt) =>  saveInfoPtofile(evt,api));
@@ -75,9 +87,8 @@ popupAddForm.addEventListener("submit",(evt) => addCard(evt,api));
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([userData, cardsData]) => {
     userDataFromServer = userData;
-    profileName.textContent = userData.name;
-    profileCaption.textContent = userData.about;
-    profileImg.src = userData.avatar;
+    userInfo.setUserInfo(userDataFromServer);
+
     const cards = cardsData.map((card) => createCard(card, userData._id, api));
     placesElements.prepend(...cards);
   })
