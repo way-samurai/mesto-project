@@ -1,146 +1,90 @@
+export default class Card {
+  constructor(selector, card, api, user, handleCardClick, handleCardDelete) {
+    this._selector = selector; //проверить
+    this._name = card.name; //Название карточки
+    this._image = card.link; //Ссылка на картинку
+    this._id = card._id; //идентификатор карточки
+    this._ownerId = card.owner._id; //идентификатор пользователя, который создал карточку
+    this._likes = card.likes; //массив пользователей лайкнувших карточку
+    this._api = api;
+    this._user = user; //объект с данными о пользователе
+    this._userId = user._id; //id пользователя
+    this._card = card; //объект с данными карточки
 
-import {
-  closePopup,
-  openPopup,
-  renderLoading,
-  deactivatingButton
-} from "./utils";
-
-import {
-  cardTemplate,
-  openImage,
-  popupImage,
-  popupImageCaption,
-  confirmPopup,
-  confirmSubmitButton,
-  popupSubmitButton,
-  nameCardInput,
-  linkCardInput,
-  placesElements,
-  popupAddForm,
-  addPopup
-} from "./data";
-
-import {
-  userDataFromServer,
-  api
-} from "./index";
-
-let cardForDelete = null;
-
-const cloneTemplate = () => {
-  return cardTemplate.querySelector(".place").cloneNode(true);
-};
-
-confirmSubmitButton.addEventListener("click", () => {
-  submitDeleteCardAprove(cardForDelete, api );
-})
-
-function handleDeleteCard(cardElement, _id) {
-  cardForDelete = {
-    cardElement,
-    _id,
-  };
-  openPopup(confirmPopup);
-}
-
-//Добавление карточек
-function createCard({
-  name,
-  link,
-  _id,
-  owner,
-  likes
-}, myId,api) {
-  const cardElement = cloneTemplate();
-  const cardTitle = cardElement.querySelector(".place__title");
-  const cardImage = cardElement.querySelector(".place__image");
-  const cardLikesCounter = cardElement.querySelector(".place__likes-counter");
-  const cardLikeButton = cardElement.querySelector(".place__like-button");
-  const cardDeleteButton = cardElement.querySelector(".place__delete-button");
-
-  cardTitle.textContent = name;
-  cardImage.src = link;
-  cardImage.alt = name;
-  cardLikesCounter.textContent = `${likes.length}`;
-
-  if (likes.some((like) => like._id === myId)) {
-    cardLikeButton.classList.add("place__like-button_active");
+    this._handleCardClick = handleCardClick; //метод открытия попапа увеличенного фото
+    this._handleCardDelete = handleCardDelete; //метод открытия попапа подтверждения удаления карточки
   }
 
-  cardDeleteButton.classList.toggle(
-    "place__delete-button_hidden",
-    owner._id !== myId
-  );
-
-  if (owner._id === myId) {
-    cardDeleteButton.addEventListener(
-      "click",
-      () => {
-        handleDeleteCard(cardElement, _id);
-      },
-      true
-    );
+  //Клонируем шаблон
+  _getElement() {
+    return document.querySelector(this._selector)
+    .content.querySelector(".place")
+    .cloneNode(true);
   }
 
-  cardImage.addEventListener("click", function () {
-    popupImage.src = cardImage.src;
-    popupImage.alt = name;
-    popupImageCaption.textContent = name;
-    openPopup(openImage);
-  });
+  //Создаем карточку
+  generate() {
+    this._element = this._getElement();
 
-  cardLikeButton.addEventListener("click", function handleLikes() {
-    const myLike = likes.find((like) => like._id === myId);
+    this._cardTitle = this._element.querySelector(".place__title");
+    this._cardImage = this._element.querySelector(".place__image");
+    this._cardLikesCounter = this._element.querySelector(".place__likes-counter");
+    this._cardLikeButton = this._element.querySelector(".place__like-button");
+    this._cardDeleteButton = this._element.querySelector(".place__delete-button");
+
+    this._cardTitle.textContent = this._name;
+    this._cardImage.src = this._image;
+    this._cardImage.alt = this._name;
+
+    this._cardDeleteButton.classList.toggle(
+      "place__delete-button_hidden",
+      this._ownerId !== this._userId
+    ); //проверить, если что переписать
+
+    this._checkLike(this._likes);
+    this._setEventListeners();
+
+    return this._element;
+  }
+
+  //Проверка наличия лайка пользователя
+  _checkLike(likes) {
+    const myLike = (like) => like._id === this._userId;
+    if (likes.some(myLike)) {
+      this._cardLikeButton.add("place__like-button_active")
+    }
+  }
+
+  //Постановка/снятие лайка
+  _handleLikes() {
+    const myLike = this._likes.find((like) => like._id === this._userId);
     const method = myLike !== undefined ? "DELETE" : "PUT";
-    api.addHandleLikes(_id, method)
+    api.addHandleLikes(this._id, method)
       .then((data) => {
-        likes = data.likes;
-        cardLikesCounter.textContent = `${likes.length}`;
+        this._likes = data.likes;
+        this._cardLikesCounter.textContent = `${this._likes.length}`;
 
-        if (likes.some((like) => like._id === myId)) {
-          cardLikeButton.classList.add("place__like-button_active");
+        if (this._likes.some((like) => like._id === this._userId)) {
+          this._cardLikeButton.add("place__like-button_active");
         } else {
-          cardLikeButton.classList.remove("place__like-button_active");
+          this._cardLikeButton.remove("place__like-button_active");
         }
       })
       .catch((err) => console.log(err));
-  });
-  return cardElement;
+  }
+
+  //Вешаем слушатели на кнопки карточки
+  _setEventListeners() {
+    this._cardLikeButton.addEventListener("click", () => {
+      this._handleLikes();
+    });
+
+    this._cardDeleteButton.addEventListener("click", () => {
+      this._handleCardDelete();
+    });
+
+    this._cardImage.addEventListener("click", () => {
+      this._handleCardClick();
+    });
+  }
 }
-
-function addCard(evt, api) {
-  evt.preventDefault();
-  renderLoading(true, popupSubmitButton, "Создать");
-  api.addNewCard(nameCardInput.value, linkCardInput.value)
-    .then((card) => {
-      placesElements.prepend(createCard(card, userDataFromServer._id, api));
-    })
-    .then(() => {
-      closePopup(addPopup);
-      popupAddForm.reset();
-      deactivatingButton(popupSubmitButton);
-    })
-    .catch((err) => console.log(err))
-    .finally(() => renderLoading(false, popupSubmitButton, "Создать"));
-}
-
-function submitDeleteCardAprove(cardForDelete, api) {
-  if (!cardForDelete) return;
-
-  renderLoading(true, confirmSubmitButton, 'Да');
-  api.deleteCard(cardForDelete._id)
-    .then(() => {
-      cardForDelete.cardElement.remove();
-      closePopup(confirmPopup);
-      cardForDelete = null;
-    })
-    .catch((err) => console.log(err))
-    .finally(() => renderLoading(false, confirmSubmitButton, 'Да'));
-}
-
-export {
-  createCard,
-  submitDeleteCardAprove,
-  addCard
-};
