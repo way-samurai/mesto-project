@@ -8,7 +8,8 @@ import {
   placesElements,
   profileFormSubmit,
   formChangeAvatar,
-  settings
+  settings,
+  confirmPopup
 } from "./data";
 
 import {
@@ -43,6 +44,8 @@ import UserInfo from "./UserInfo";
 
 
 import FormValidator from "./FormValidator.js";
+
+import PopupConfirmDeleteCard from "./PopupConfirmDeleteCard";
 
 //Валидация редактирования профиля
 const editProfileValidator = new FormValidator(profileFormSubmit, settings);
@@ -87,4 +90,15 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
   })
   .catch((err) => console.log(err));
 
+  
 
+//Удаление карточки со страницы
+const popupConfirmDeleteCard = new PopupConfirmDeleteCard (confirmPopup,
+  function handleFormSubmit() {
+    api.deleteCard(popupConfirmDeleteCard._id)
+      .then(() => {
+        popupConfirmDeleteCard.card.remove();
+        popupConfirmDeleteCard.close();
+      })
+      .catch((err) => console.log(err))
+  });

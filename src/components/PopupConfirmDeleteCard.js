@@ -1,27 +1,20 @@
-import {Popup} from "./Popup";
-import {renderLoading} from "./utils";
-import {confirmSubmitButton} from "./data";
+import Popup from "./Popup";
 
-export class PopupConfirmDeleteCard extends Popup{
-  constructor(popupSelector, cardForDelete, api) {
+export default class PopupConfirmDeleteCard extends Popup{
+  constructor(popupSelector, submitForm) {
     super(popupSelector)
-    this._cardForDelete = cardForDelete;
-    this._api = api;
+    this._submitForm = submitForm;
   }
 
-  submitDeleteCardAprove() {
-    if (!this._cardForDelete) return;
+  setEventListeners() {
+    super.setEventListeners();
+    document.querySelector("#confirmDeleteButton")
+    .addEventListener("mousedown", this._handleFormSubmit);
+  }
 
-    renderLoading(true, confirmSubmitButton, 'Да');
-    this._api.deleteCard(this._cardForDelete._id)
-      .then(() => {
-        this._cardForDelete.cardElement.remove();
-        this.closePopup();
-        this._cardForDelete = null;
-      })
-      .catch((err) => console.log(err))
-      .finally(() => renderLoading(false, confirmSubmitButton, 'Да'));
+  open(id, card) {
+    this._id = id;
+    this.card = card;
+    super.open();
   }
 }
-
-
