@@ -50,6 +50,8 @@ import PopupConfirmDeleteCard from "./PopupConfirmDeleteCard";
 
 import PopupWithImage from "./PopupWithImage";
 
+import PopupWithForm from "./PopupWithForm";
+
 //Валидация редактирования профиля
 const editProfileValidator = new FormValidator(profileFormSubmit, settings);
 editProfileValidator.enableValidation();
@@ -111,7 +113,19 @@ const popupConfirmDeleteCard = new PopupConfirmDeleteCard (confirmPopup,
 const popupWithImage = new PopupWithImage(openImage);
 
 
+//Пример использования PopupWithForm
+// const popupFormProfileEdit = new PopupWithForm(modalProfile,
+//   function handleFormSubmit(data) {
+//     'форма редактирования профиля'.renderLoading(true);
+//     api.'функция из Api'(..., ...)
+//       .then((...) => {
 
+//       })
+//       .catch((err) => console.error(err))
+//       .finally(() => {
+//
+//       })
+//   }, form);
 
 
 
