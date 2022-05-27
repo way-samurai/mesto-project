@@ -85,3 +85,4 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
   })
   .catch((err) => console.log(err));
 
+
