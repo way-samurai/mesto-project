@@ -29,8 +29,8 @@ import {
 } from "./modal";
 
 
-import { Api
-} from "./api.js";
+import { api
+} from "./Api";
 
 import {
   Promise
@@ -63,14 +63,7 @@ openAddCardPopup();
 editProfileInfo();
 popupObjects.forEach((popup) => popup.closePopupByEscAndClickOverlay())
 
-//Создание экземпляра класса Api
-export const api = new Api({
-  baseUrl: "https://nomoreparties.co/v1/plus-cohort-9",
-  headers: {
-    authorization: "3e17db6a-6951-46bf-9280-ebc36e39e39a",
-    "Content-Type": "application/json"
-  },
-});
+
 
 //Создание экземпляра класса UserInfo
 export const userInfo = new UserInfo({

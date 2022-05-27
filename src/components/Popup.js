@@ -1,8 +1,10 @@
 import {
-  addPopup, changeAvatarPopup, confirmPopup, editPopup, openImage
-
+  addPopup,
+  changeAvatarPopup,
+  confirmPopup,
+  editPopup,
+  openImage
 } from "./data";
-
 
 export class Popup {
   constructor(popupSelector) {

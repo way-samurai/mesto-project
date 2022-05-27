@@ -1,6 +1,3 @@
-
-
-
 //Изменение текста кнопки самбит
 export function renderLoading(isLoading, button, buttonText = 'Сохранить') {
   if (isLoading) {
@@ -9,8 +6,6 @@ export function renderLoading(isLoading, button, buttonText = 'Сохранит�
     button.textContent = buttonText;
   }
 }
-
-
 
 //Функция деактивация сабмита попапов
 export function deactivatingButton(button) {

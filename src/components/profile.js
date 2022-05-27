@@ -43,8 +43,6 @@ function changeAvatar(evt, api) {
     .finally(() => renderLoading(false, changeAvatarSubmit));
 }
 
-
-
 export {
   saveInfoPtofile,
   changeAvatar
