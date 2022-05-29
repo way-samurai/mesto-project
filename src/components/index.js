@@ -13,10 +13,10 @@ import {
   openImage
 } from "./data";
 
-import {
-  createCard,
-  addCard
-} from "./card";
+// import {
+//   createCard,
+//   addCard
+// } from "./card1";
 
 import {
   saveInfoPtofile,
@@ -36,7 +36,7 @@ import { api
 
 import {
   Promise
-} from "core-js";
+} from "core-js"; //Зачем это?
 
 
 import {popupObjects} from "./Popup"
@@ -90,7 +90,7 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
     userDataFromServer = userData;
     userInfo.setUserInfo(userDataFromServer);
 
-    const cards = cardsData.map((card) => createCard(card, userData._id, api));
+    const cards = cardsData.map((card) => createCard(card, userDataFromServer._id, api));
     placesElements.prepend(...cards);
   })
   .catch((err) => console.log(err));
