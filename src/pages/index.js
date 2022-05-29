@@ -1,4 +1,4 @@
-import "../pages/index.css";
+import "../pages/index.css";  //++++
 
 import {
   popupAddForm,
@@ -11,90 +11,67 @@ import {
   settings,
   confirmPopup,
   openImage
-} from "./data";
-
-// import {
-//   createCard,
-//   addCard
-// } from "./card1";
-
-import {
-  saveInfoPtofile,
-  changeAvatar
-} from "./profile";
-
-
-import {
-  editProfileInfo,
-  openAddCardPopup,
-  openChangeAvatarPopup,
-} from "./modal";
-
+} from "../components/utils/data"; //++++
 
 import { api
-} from "./Api";
+} from "../components/Api"; //++++
 
-import {
-  Promise
-} from "core-js"; //Зачем это?
+// import {
+//   Promise
+// } from "core-js"; //Зачем это?
 
+import UserInfo from "../components/UserInfo"; //++++
 
-import {popupObjects} from "./Popup"
+import FormValidator from "../components/FormValidator.js"; //++++
 
-import UserInfo from "./UserInfo";
+import PopupConfirmDeleteCard from "../components/PopupConfirmDeleteCard"; //++++
 
+import PopupWithImage from "../components/PopupWithImage"; //++++
 
-import FormValidator from "./FormValidator.js";
-
-import PopupConfirmDeleteCard from "./PopupConfirmDeleteCard";
-
-import PopupWithImage from "./PopupWithImage";
-
-import PopupWithForm from "./PopupWithForm";
+import PopupWithForm from "../components/PopupWithForm";  //++++
 
 //Валидация редактирования профиля
 const editProfileValidator = new FormValidator(profileFormSubmit, settings);
-editProfileValidator.enableValidation();
+editProfileValidator.enableValidation();  //+++
 
 //Валидация редактирования аватара
 const editCreateAvatarValidator = new FormValidator(formChangeAvatar, settings);
-editCreateAvatarValidator.enableValidation();
+editCreateAvatarValidator.enableValidation();  //+++
 
 //Валидация добавления карточки
 const addCardFormValidator = new FormValidator(popupAddForm, settings);
-addCardFormValidator.enableValidation();
+addCardFormValidator.enableValidation();  //+++
 
-export let userDataFromServer = null;
+export let userDataFromServer = null;  //++++
 
-openChangeAvatarPopup();
-openAddCardPopup();
-editProfileInfo();
-popupObjects.forEach((popup) => popup.closePopupByEscAndClickOverlay())
-
-
+// openChangeAvatarPopup();
+// openAddCardPopup();
+// editProfileInfo();
+// popupObjects.forEach((popup) => popup.closePopupByEscAndClickOverlay())
 
 //Создание экземпляра класса UserInfo
 export const userInfo = new UserInfo({
   nameInput: ".info-box__name",
   aboutInput: ".info-box__caption",
   avatarLink: ".profile__avatar-img"
-})
+}); //++++
 
-formChangeAvatar.addEventListener("submit", (evt) =>  changeAvatar(evt,api));
-profileFormSubmit.addEventListener("submit",(evt) =>  saveInfoPtofile(evt,api));
-popupAddForm.addEventListener("submit",(evt) => addCard(evt,api));
 
+
+// formChangeAvatar.addEventListener("submit", (evt) =>  changeAvatar(evt,api));
+// profileFormSubmit.addEventListener("submit",(evt) =>  saveInfoPtofile(evt,api));
+// popupAddForm.addEventListener("submit",(evt) => addCard(evt,api));
 
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([userData, cardsData]) => {
     userDataFromServer = userData;
     userInfo.setUserInfo(userDataFromServer);
 
-    const cards = cardsData.map((card) => createCard(card, userDataFromServer._id, api));
+
+    // const cards = cardsData.map((card) => createCard(card, userDataFromServer._id, api));
     placesElements.prepend(...cards);
   })
   .catch((err) => console.log(err));
-
 
 
 //Удаление карточки со страницы
@@ -106,7 +83,7 @@ const popupConfirmDeleteCard = new PopupConfirmDeleteCard (confirmPopup,
         popupConfirmDeleteCard.close();
       })
       .catch((err) => console.log(err))
-  });
+  }); //++++
 
 
 //Попап с изображением
@@ -127,8 +104,5 @@ const popupWithImage = new PopupWithImage(openImage);
 //       })
 //   }, form);
 
-
-
-
-popupWithImage.setEventListeners();
-popupConfirmDeleteCard.setEventListeners();
+popupWithImage.setEventListeners(); //+++
+popupConfirmDeleteCard.setEventListeners();  //+++

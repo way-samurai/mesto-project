@@ -1,11 +1,3 @@
-// import {
-//   addPopup,
-//   changeAvatarPopup,
-//   confirmPopup,
-//   editPopup,
-//   openImage
-// } from "./data";
-
 export default class Popup {
   constructor(popupSelector) {
     this._popupSelector = popupSelector;
@@ -17,21 +9,21 @@ export default class Popup {
     document.addEventListener("keydown", this._closeByEscape);
   }
 
-//Функция закрытия модального окна
+  //Функция закрытия модального окна
   close() {
     this._popupSelector.classList.remove("popup_opened");
     document.removeEventListener("keydown", this._closeByEscape);
   }
 
-//UPP Функция закрытия модального окна клавишей esc
+  //UPP Функция закрытия модального окна клавишей esc
   _closeByEscape = (evt) => {
     if (evt.key === "Escape") {
       this.close();
     }
-  }
+  };
 
   //функция закрытия попапа разными способами
-  setEventListeners () {
+  setEventListeners() {
     this._popupSelector.addEventListener("mousedown", (evt) => {
       if (evt.target.classList.contains("popup_opened")) {
         this.close();
