@@ -5,12 +5,12 @@ export default class UserInfo {
     this._avatarLink = document.querySelector(avatarLink);
   }
 
-  getUserInfo() {
+  getInfoProfile() {
     return {
       name: this._nameInput.textContent,
       about: this._aboutInput.textContent,
-      avatarLink: this._avatarLink.src
-    }
+      avatarLink: this._avatarLink.src,
+    };
   }
 
   setUserInfo(data) {
@@ -19,7 +19,8 @@ export default class UserInfo {
     this._avatarLink.src = data.avatar;
   }
 
-  getUserId(data) {  //Если не понадобится, то удалить!
-    return this._id = data._id;
+  getUserId(data) {
+    //Если не понадобится, то удалить!
+    return (this._id = data._id);
   }
 }

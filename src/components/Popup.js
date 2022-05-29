@@ -43,3 +43,4 @@ export default class Popup {
 // export let confirmPopupObject = new Popup(confirmPopup)
 // export let openImageObject = new Popup(openImage)
 // export let popupObjects = Array.from(document.querySelectorAll(".popup")).map((popup) => new Popup(popup));
+

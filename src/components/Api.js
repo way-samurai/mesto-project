@@ -1,12 +1,12 @@
 //для взаимодействия с сервером
-export class Api{
+export class Api {
   constructor(data) {
     this._baseUrl = data.baseUrl;
     this._headers = data.headers;
   }
 
   //Проверка статуса запроса
-  _onResponse = function (res) {
+  _onResponse = (res) => {
     if (res.ok) {
       return res.json();
     }
@@ -20,7 +20,7 @@ export class Api{
     return fetch(`${this._baseUrl}/users/me`, {
       method: "GET",
       headers: this._headers,
-    }).then((res) => this._onResponse(res));
+    }).then(this._onResponse);
   };
 
   //Изменение данных пользователя
@@ -32,7 +32,7 @@ export class Api{
         name: userName,
         about: userInfo,
       }),
-    }).then((res) => this._onResponse(res));
+    }).then(this._onResponse);
   };
 
   //Запрос изначальных карточек
@@ -40,10 +40,10 @@ export class Api{
     return fetch(`${this._baseUrl}/cards`, {
       method: "GET",
       headers: this._headers,
-    }).then((res) => this._onResponse(res));
+    }).then(this._onResponse);
   };
 
-//Добавление новой карточки
+  //Добавление новой карточки
   addNewCard = (placeName, imageLink) => {
     return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
@@ -52,26 +52,26 @@ export class Api{
         name: placeName,
         link: imageLink,
       }),
-    }).then((res) => this._onResponse(res));
+    }).then(this._onResponse);
   };
 
-//Лайки
+  //Лайки
   addHandleLikes = (id, method) => {
     return fetch(`${this._baseUrl}/cards/likes/${id}`, {
       method: method,
       headers: this._headers,
-    }).then((res) => this._onResponse(res));
+    }).then(this._onResponse);
   };
 
-//Удаление карточки
+  //Удаление карточки
   deleteCard = (id) => {
     return fetch(`${this._baseUrl}/cards/${id}`, {
       method: "DELETE",
       headers: this._headers,
-    }).then((res) => this._onResponse(res));
+    }).then(this._onResponse);
   };
 
-//Изменение аватара
+  //Изменение аватара
   editUserAvatar = (link) => {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
@@ -79,15 +79,25 @@ export class Api{
       body: JSON.stringify({
         avatar: link,
       }),
-    }).then((res) => this._onResponse(res));
+    }).then(this._onResponse);
   };
 }
 
 //Создание экземпляра класса Api
+// export const api = new Api({
+//   baseUrl: "https://nomoreparties.co/v1/plus-cohort-9",
+//   headers: {
+//     authorization: "3e17db6a-6951-46bf-9280-ebc36e39e39a",
+//     "Content-Type": "application/json",
+//   },
+// });
 export const api = new Api({
   baseUrl: "https://nomoreparties.co/v1/plus-cohort-9",
   headers: {
-    authorization: "3e17db6a-6951-46bf-9280-ebc36e39e39a",
-    "Content-Type": "application/json"
+    authorization: "cda53605-ab20-47f0-90b4-9efa5160708a",
+    "Content-Type": "application/json",
   },
 });
+
+
+

@@ -14,7 +14,7 @@ export default class PopupConfirmDeleteCard extends Popup{
 
   open(id, card) {
     this._id = id;
-    this.card = card;
+    this._card = card;
     super.open();
   }
 }

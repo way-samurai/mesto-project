@@ -52,7 +52,7 @@ const changeAvatarPopup = document.querySelector("#changeAvatarPopup");
 //Форма изменения фото аватара
 const formChangeAvatar = changeAvatarPopup.querySelector(".popup__form");
 //Поле ввода ссылки на картинку аватара
-const linkAvatarInput = document.querySelector("#avatar-link");
+const linkAvatarInput = changeAvatarPopup.querySelector("#avatar-link");
 //Кнопка сабмита формы изменения аватара
 const changeAvatarSubmit = changeAvatarPopup.querySelector(".popup__submit");
 
@@ -108,5 +108,5 @@ export {
   confirmForm,
   profileSubmitButton,
   popupCloseButton,
-  settings
+  settings,
 };
