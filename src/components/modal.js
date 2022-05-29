@@ -1,5 +1,4 @@
 import {
-  openPopup,
   deactivatingButton
 } from "./utils";
 
@@ -18,12 +17,14 @@ import {
   profileSubmitButton,
 } from "./data";
 
+import {Popup} from "./Popup";
+
 function editProfileInfo() {
   //Слушатель на кнопке редактирование профиля
   profileEditButton.addEventListener("click", function () {
     nameInput.value = profileName.textContent;
     operationInput.value = profileCaption.textContent;
-    openPopup(editPopup);
+    editPopupObject.openPopup();
     deactivatingButton(profileSubmitButton);
   });
 }
@@ -31,14 +32,14 @@ function editProfileInfo() {
 function openAddCardPopup() {
   //слушатель на кнопке добавления карточки
   addCardButton.addEventListener("click", function () {
-    openPopup(addPopup);
+    addPopupObject.openPopup();
   });
 }
 
 function openChangeAvatarPopup() {
   //Слушатель на кнопке аватара
   profileAvatarContainer.addEventListener("click", function () {
-    openPopup(changeAvatarPopup);
+    changeAvatarPopupObject.openPopup();
     deactivatingButton(changeAvatarSubmit);
   });
 }

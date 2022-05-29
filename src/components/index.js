@@ -8,7 +8,9 @@ import {
   placesElements,
   profileFormSubmit,
   formChangeAvatar,
-  settings
+  settings,
+  confirmPopup,
+  openImage
 } from "./data";
 
 // import {
@@ -21,9 +23,6 @@ import {
   changeAvatar
 } from "./profile";
 
-import {
-  closePopupByEscAndClickOverlay
-} from "./utils";
 
 import {
   editProfileInfo,
@@ -32,17 +31,26 @@ import {
 } from "./modal";
 
 
-import { Api
-} from "./api.js";
+import { api
+} from "./Api";
 
 import {
   Promise
 } from "core-js"; //Зачем это?
 
 
+import {popupObjects} from "./Popup"
+
 import UserInfo from "./UserInfo";
 
+
 import FormValidator from "./FormValidator.js";
+
+import PopupConfirmDeleteCard from "./PopupConfirmDeleteCard";
+
+import PopupWithImage from "./PopupWithImage";
+
+import PopupWithForm from "./PopupWithForm";
 
 //Валидация редактирования профиля
 const editProfileValidator = new FormValidator(profileFormSubmit, settings);
@@ -61,16 +69,9 @@ export let userDataFromServer = null;
 openChangeAvatarPopup();
 openAddCardPopup();
 editProfileInfo();
-closePopupByEscAndClickOverlay();
+popupObjects.forEach((popup) => popup.closePopupByEscAndClickOverlay())
 
-//Создание экземпляра класса Api
-export const api = new Api({
-  baseUrl: "https://nomoreparties.co/v1/plus-cohort-9",
-  headers: {
-    authorization: "3e17db6a-6951-46bf-9280-ebc36e39e39a",
-    "Content-Type": "application/json"
-  },
-});
+
 
 //Создание экземпляра класса UserInfo
 export const userInfo = new UserInfo({
@@ -94,3 +95,40 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
   })
   .catch((err) => console.log(err));
 
+
+
+//Удаление карточки со страницы
+const popupConfirmDeleteCard = new PopupConfirmDeleteCard (confirmPopup,
+  function handleFormSubmit() {
+    api.deleteCard(popupConfirmDeleteCard._id)
+      .then(() => {
+        popupConfirmDeleteCard.card.remove();
+        popupConfirmDeleteCard.close();
+      })
+      .catch((err) => console.log(err))
+  });
+
+
+//Попап с изображением
+const popupWithImage = new PopupWithImage(openImage);
+
+
+//Пример использования PopupWithForm
+// const popupFormProfileEdit = new PopupWithForm(modalProfile,
+//   function handleFormSubmit(data) {
+//     'форма редактирования профиля'.renderLoading(true);
+//     api.'функция из Api'(..., ...)
+//       .then((...) => {
+
+//       })
+//       .catch((err) => console.error(err))
+//       .finally(() => {
+//
+//       })
+//   }, form);
+
+
+
+
+popupWithImage.setEventListeners();
+popupConfirmDeleteCard.setEventListeners();

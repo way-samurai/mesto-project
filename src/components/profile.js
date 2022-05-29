@@ -1,5 +1,4 @@
 import {
-  closePopup,
   renderLoading
 } from "./utils";
 
@@ -15,6 +14,7 @@ import {
   profileImg,
   changeAvatarPopup
 } from "./data";
+import {changeAvatarPopupObject, editPopupObject} from "./Popup";
 
 function saveInfoPtofile(evt, api) {
   evt.preventDefault();
@@ -23,7 +23,7 @@ function saveInfoPtofile(evt, api) {
     .then(() => {
       profileName.textContent = nameInput.value;
       profileCaption.textContent = operationInput.value;
-      closePopup(editPopup);
+      editPopupObject.closePopup();
     })
     .catch((err) => console.log(err))
     .finally(() => renderLoading(false, profileSubmitButton));
@@ -35,15 +35,13 @@ function changeAvatar(evt, api) {
   api.editUserAvatar(linkAvatarInput.value)
     .then((data) => {
       profileImg.src = data.avatar;
-      closePopup(changeAvatarPopup);
+      changeAvatarPopupObject.closePopup();
       changeAvatarSubmit.disabled = true;
       changeAvatarSubmit.classList.add("popup__submit_disabled");
     })
     .catch((err) => console.log(err))
     .finally(() => renderLoading(false, changeAvatarSubmit));
 }
-
-
 
 export {
   saveInfoPtofile,
