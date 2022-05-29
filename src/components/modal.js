@@ -16,6 +16,7 @@ import {
   changeAvatarSubmit,
   profileSubmitButton,
 } from "./data";
+
 import {Popup} from "./Popup";
 
 function editProfileInfo() {

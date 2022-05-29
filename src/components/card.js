@@ -1,4 +1,3 @@
-
 import {
   renderLoading,
   deactivatingButton
@@ -20,9 +19,13 @@ import {
 } from "./data";
 
 import {
-  userDataFromServer,
-  api
+  userDataFromServer
 } from "./index";
+
+import {
+  api
+} from "./Api";
+
 import {addPopupObject, confirmPopupObject, openImageObject} from "./Popup";
 
 let cardForDelete = null;
@@ -32,7 +35,8 @@ const cloneTemplate = () => {
 };
 
 confirmSubmitButton.addEventListener("click", () => {
-  submitDeleteCardAprove(cardForDelete, api );
+  const objectConfirm = new PopupConfirmDeleteCard(confirmPopup, cardForDelete, api )
+  objectConfirm.submitDeleteCardAprove(cardForDelete);
 })
 
 function handleDeleteCard(cardElement, _id) {
@@ -124,22 +128,9 @@ function addCard(evt, api) {
     .finally(() => renderLoading(false, popupSubmitButton, "Создать"));
 }
 
-function submitDeleteCardAprove(cardForDelete, api) {
-  if (!cardForDelete) return;
-
-  renderLoading(true, confirmSubmitButton, 'Да');
-  api.deleteCard(cardForDelete._id)
-    .then(() => {
-      cardForDelete.cardElement.remove();
-      confirmPopupObject.closePopup();
-      cardForDelete = null;
-    })
-    .catch((err) => console.log(err))
-    .finally(() => renderLoading(false, confirmSubmitButton, 'Да'));
-}
+import {PopupConfirmDeleteCard} from './PopupConfirmDeleteCard'
 
 export {
   createCard,
-  submitDeleteCardAprove,
   addCard
 };
