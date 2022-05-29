@@ -35,6 +35,14 @@ export default class Popup {
       }
     });
   }
+
+  renderLoading(isLoading) {
+    if (isLoading) {
+      this._buttonSubmit.textContent = "Сохранение...";
+    } else {
+      this._buttonSubmit.textContent = "Сохранить";
+    }
+  }
 }
 
 // export let editPopupObject = new Popup(editPopup)

@@ -51,21 +51,13 @@ export default class Card {
     this._cardDeleteButton.classList.toggle(
       "place__delete-button_hidden",
       this._ownerId !== this._userId
-    ); //проверить, если что переписать
+    ); 
 
     this._checkLike(this._likes);
     this._setEventListeners();
 
     return this._element;
   }
-
-  //Проверка наличия лайка пользователя
-  // _checkLike(likes) {
-  //   const myLike = (like) => like._id === this._userId;
-  //   if (likes.some(myLike)) {
-  //     this._cardLikeButton.add("place__like-button_active")
-  //   }
-  // }
 
   _checkLike(likes) {
     this._cardLikesCounter.textContent = `${this._likes.length}`;
@@ -101,7 +93,7 @@ export default class Card {
     });
 
     this._cardDeleteButton.addEventListener("click", () => {
-      this._handleCardDelete(this._id, this._card);
+      this._handleCardDelete(this._id, this._element);
     });
 
     this._cardImage.addEventListener("click", () => {

@@ -15,28 +15,25 @@ import {
   profileEditButton,
   changeAvatarPopup,
   profileAvatarContainer,
-  linkAvatarInput
-} from "../components/utils/data.js"; //++++
+  linkAvatarInput,
+  confirmForm
+} from "../components/utils/data.js";
 
-import { api } from "../components/api.js"; //++++
+import { api } from "../components/api.js";
 
-// import {
-//   Promise
-// } from "core-js"; //Зачем это?
-
-import UserInfo from "../components/UserInfo"; //++++
+import UserInfo from "../components/UserInfo";
 
 import Section from "../components/Section";
 
 import Card from "../components/Card";
 
-import FormValidator from "../components/FormValidator.js"; //++++
+import FormValidator from "../components/FormValidator.js";
 
-import PopupConfirmDeleteCard from "../components/PopupConfirmDeleteCard"; //++++
+import PopupConfirmDeleteCard from "../components/PopupConfirmDeleteCard";
 
-import PopupWithImage from "../components/PopupWithImage"; //++++
+import PopupWithImage from "../components/PopupWithImage";
 
-import PopupWithForm from "../components/PopupWithForm"; //++++
+import PopupWithForm from "../components/PopupWithForm";
 
 //Валидация редактирования профиля
 const editProfileValidator = new FormValidator(profileFormSubmit, settings);
@@ -57,7 +54,7 @@ const userInfo = new UserInfo({
   nameInput: ".info-box__name",
   aboutInput: ".info-box__caption",
   avatarLink: ".profile__avatar-img",
-}); //++++
+});
 
 const cardList = new Section(renderCard, ".elements");
 
@@ -84,8 +81,8 @@ const popupConfirmDeleteCard = new PopupConfirmDeleteCard(
       .finally(() => {
         popupConfirmDeleteCard.renderLoading(false);
       });
-  }
-); //++++
+  }, confirmForm
+);
 
 //Попап с изображением
 const popupWithImage = new PopupWithImage(openImage);
@@ -98,7 +95,6 @@ const popupChangeUserInfo = new PopupWithForm(
     api
       .editUserInfo(data.name, data.about)
       .then((user) => {
-        console.log(user)
         userInfo.setUserInfo(user);
         popupChangeUserInfo.close();
       })
@@ -110,16 +106,13 @@ const popupChangeUserInfo = new PopupWithForm(
   profileFormSubmit
 );
 
-
-
-
 //Попап редактирования аватара
 const popupChangeUserAvatar = new PopupWithForm(
   changeAvatarPopup,
   function (data) {
     popupChangeUserAvatar.renderLoading(true);
     api
-      .editUserAvatar(data['avatar-link']) //Найти причину и исправить!!!
+      .editUserAvatar(data["avatar-link"])
       .then((user) => {
         userInfo.setUserInfo(user);
         popupChangeUserAvatar.close();
@@ -127,32 +120,10 @@ const popupChangeUserAvatar = new PopupWithForm(
       .catch((err) => console.log(err))
       .finally(() => {
         popupChangeUserAvatar.renderLoading(false);
-
       });
-
-
   },
   formChangeAvatar
 );
-
-
-
-
-//Попап редактирования карточки
-
-//Пример использования PopupWithForm
-// const popupFormProfileEdit = new PopupWithForm(modalProfile,
-//   function handleFormSubmit(data) {
-//     'форма редактирования профиля'.renderLoading(true);
-//     api.'функция из Api'(..., ...)
-//       .then((...) => {
-
-//       })
-//       .catch((err) => console.error(err))
-//       .finally(() => {
-
-//       })
-//   }, form);
 
 popupWithImage.setEventListeners(); //+++
 popupConfirmDeleteCard.setEventListeners(); //+++
@@ -178,8 +149,8 @@ function handleCardClick(name, link) {
   popupWithImage.open(name, link);
 }
 
-function handleCardDelete(id, card) {
-  popupConfirmDeleteCard.open(id, card);
+function handleCardDelete(id, element) {
+  popupConfirmDeleteCard.open(id, element);
 }
 
 //слушатель открытия попапа редактирования профиля
