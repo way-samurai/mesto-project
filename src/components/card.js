@@ -7,7 +7,7 @@ export default class Card {
     handleCardClick,
     handleCardDelete
   ) {
-    this._selector = selector; //проверить
+    this._selector = selector;
     this._name = card.name; //Название карточки
     this._image = card.link; //Ссылка на картинку
     this._id = card._id; //идентификатор карточки
@@ -75,7 +75,6 @@ export default class Card {
       .then((data) => {
         this._likes = data.likes;
         this._cardLikesCounter.textContent = `${this._likes.length}`;
-        //this._cardLikesCounter.textContent = data.likes.length;
 
         if (this._likes.some((like) => like._id === this._userId)) {
           this._cardLikeButton.classList.add("place__like-button_active");

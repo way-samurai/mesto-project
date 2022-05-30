@@ -18,9 +18,4 @@ export default class UserInfo {
     this._aboutInput.textContent = data.about;
     this._avatarLink.src = data.avatar;
   }
-
-  getUserId(data) {
-    //Если не понадобится, то удалить!
-    return (this._id = data._id);
-  }
 }
