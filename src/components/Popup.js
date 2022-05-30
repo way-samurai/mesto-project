@@ -36,19 +36,11 @@ export default class Popup {
     });
   }
 
-  renderLoading(isLoading) {
+  renderLoading(isLoading, buttonText = "Сохранить") {
     if (isLoading) {
       this._buttonSubmit.textContent = "Сохранение...";
     } else {
-      this._buttonSubmit.textContent = "Сохранить";
+      this._buttonSubmit.textContent = buttonText;
     }
   }
 }
-
-// export let editPopupObject = new Popup(editPopup)
-// export let addPopupObject = new Popup(addPopup)
-// export let changeAvatarPopupObject = new Popup(changeAvatarPopup)
-// export let confirmPopupObject = new Popup(confirmPopup)
-// export let openImageObject = new Popup(openImage)
-// export let popupObjects = Array.from(document.querySelectorAll(".popup")).map((popup) => new Popup(popup));
-

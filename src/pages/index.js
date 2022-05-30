@@ -1,12 +1,8 @@
-import "../pages/index.css"; //++++
+import "../pages/index.css";
 
 import {
   popupAddForm,
   editPopup,
-  profileName,
-  profileCaption,
-  profileImg,
-  placesElements,
   profileFormSubmit,
   formChangeAvatar,
   settings,
@@ -15,8 +11,9 @@ import {
   profileEditButton,
   changeAvatarPopup,
   profileAvatarContainer,
-  linkAvatarInput,
-  confirmForm
+  confirmForm,
+  addPopup,
+  addCardButton,
 } from "../components/utils/data.js";
 
 import { api } from "../components/api.js";
@@ -37,17 +34,19 @@ import PopupWithForm from "../components/PopupWithForm";
 
 //Валидация редактирования профиля
 const editProfileValidator = new FormValidator(profileFormSubmit, settings);
-editProfileValidator.enableValidation(); //???
+editProfileValidator.enableValidation();
 
 //Валидация редактирования аватара
 const editCreateAvatarValidator = new FormValidator(formChangeAvatar, settings);
-editCreateAvatarValidator.enableValidation(); //???
+editCreateAvatarValidator.enableValidation();
 
 //Валидация добавления карточки
 const addCardFormValidator = new FormValidator(popupAddForm, settings);
-addCardFormValidator.enableValidation(); //???
+addCardFormValidator.enableValidation();
 
-export let userDataFromServer = null; //++++
+let userDataFromServer = null;
+
+const cardList = new Section(renderCard, ".elements");
 
 //Создание экземпляра класса UserInfo
 const userInfo = new UserInfo({
@@ -55,8 +54,6 @@ const userInfo = new UserInfo({
   aboutInput: ".info-box__caption",
   avatarLink: ".profile__avatar-img",
 });
-
-const cardList = new Section(renderCard, ".elements");
 
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([userData, cardsData]) => {
@@ -70,7 +67,7 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
 const popupConfirmDeleteCard = new PopupConfirmDeleteCard(
   confirmPopup,
   function () {
-    popupConfirmDeleteCard.renderLoading(true);
+    popupConfirmDeleteCard.renderLoading(true, "Да");
     api
       .deleteCard(popupConfirmDeleteCard._id)
       .then(() => {
@@ -79,9 +76,10 @@ const popupConfirmDeleteCard = new PopupConfirmDeleteCard(
       })
       .catch((err) => console.log(err))
       .finally(() => {
-        popupConfirmDeleteCard.renderLoading(false);
+        popupConfirmDeleteCard.renderLoading(false, "Да");
       });
-  }, confirmForm
+  },
+  confirmForm
 );
 
 //Попап с изображением
@@ -125,10 +123,49 @@ const popupChangeUserAvatar = new PopupWithForm(
   formChangeAvatar
 );
 
-popupWithImage.setEventListeners(); //+++
-popupConfirmDeleteCard.setEventListeners(); //+++
-popupChangeUserInfo.setEventListeners(); //+++
-popupChangeUserAvatar.setEventListeners(); //+++
+//Попап добавления новой карточки
+const popupAddNewCard = new PopupWithForm(
+  addPopup,
+  function (data) {
+    popupAddNewCard.renderLoading(true, "Создать");
+    api
+      .addNewCard(data.placename, data.imagelink)
+      .then((card) => {
+        cardList.addItem(card);
+        popupAddNewCard.close();
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        popupAddNewCard.renderLoading(false, "Создать");
+      });
+  },
+  popupAddForm
+);
+
+//слушатель открытия попапа редактирования профиля
+profileEditButton.addEventListener("click", () => {
+  popupChangeUserInfo.setInputValues(userInfo.getInfoProfile());
+  popupChangeUserInfo.open();
+  editProfileValidator.resetValidation();
+});
+
+//слушатель открытия попапа изменения аватара
+profileAvatarContainer.addEventListener("click", () => {
+  popupChangeUserAvatar.open();
+  editCreateAvatarValidator.resetValidation();
+});
+
+//слушатель открытия попапа добавлени карточки
+addCardButton.addEventListener("click", () => {
+  popupAddNewCard.open();
+  addCardFormValidator.resetValidation();
+});
+
+popupWithImage.setEventListeners();
+popupConfirmDeleteCard.setEventListeners();
+popupChangeUserInfo.setEventListeners();
+popupChangeUserAvatar.setEventListeners();
+popupAddNewCard.setEventListeners();
 
 function renderCard(item) {
   const newCard = new Card(
@@ -152,18 +189,3 @@ function handleCardClick(name, link) {
 function handleCardDelete(id, element) {
   popupConfirmDeleteCard.open(id, element);
 }
-
-//слушатель открытия попапа редактирования профиля
-profileEditButton.addEventListener("click", () => {
-  popupChangeUserInfo.setInputValues(userInfo.getInfoProfile());
-  popupChangeUserInfo.open();
-  editProfileValidator.resetValidation();
-});
-
-//console.log(userInfo)
-console.log(userInfo.getInfoProfile())
-
-//слушатель открытия попапа изменения аватара
-profileAvatarContainer.addEventListener("click", () => {
-  popupChangeUserAvatar.open();
-});

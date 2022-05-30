@@ -51,7 +51,7 @@ export default class Card {
     this._cardDeleteButton.classList.toggle(
       "place__delete-button_hidden",
       this._ownerId !== this._userId
-    ); 
+    );
 
     this._checkLike(this._likes);
     this._setEventListeners();
