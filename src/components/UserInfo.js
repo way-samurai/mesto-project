@@ -7,8 +7,8 @@ export default class UserInfo {
 
   getInfoProfile() {
     return {
-      name: this._nameInput.textContent,
-      about: this._aboutInput.textContent,
+      username: this._nameInput.textContent,
+      operation: this._aboutInput.textContent,
       avatarLink: this._avatarLink.src,
     };
   }

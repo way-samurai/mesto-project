@@ -93,9 +93,9 @@ const popupChangeUserInfo = new PopupWithForm(
   function (data) {
     popupChangeUserInfo.renderLoading(true);
     api
-      .editUserInfo(data.name, data.about)
-      .then((user) => {
-        userInfo.setUserInfo(user);
+      .editUserInfo(data.username, data.operation)
+      .then((data) => {
+        userInfo.setUserInfo(data);
         popupChangeUserInfo.close();
       })
       .catch((err) => console.log(err))
@@ -157,8 +157,11 @@ function handleCardDelete(id, element) {
 profileEditButton.addEventListener("click", () => {
   popupChangeUserInfo.setInputValues(userInfo.getInfoProfile());
   popupChangeUserInfo.open();
-  addCardFormValidator.resetValidation();
+  editProfileValidator.resetValidation();
 });
+
+//console.log(userInfo)
+console.log(userInfo.getInfoProfile())
 
 //слушатель открытия попапа изменения аватара
 profileAvatarContainer.addEventListener("click", () => {
