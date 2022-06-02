@@ -20,6 +20,18 @@ export default class Card {
 
     this._handleCardClick = handleCardClick; //метод открытия попапа увеличенного фото
     this._handleCardDelete = handleCardDelete; //метод открытия попапа подтверждения удаления карточки
+
+    this._element = this._getElement();
+
+    this._cardTitle = this._element.querySelector(".place__title");
+    this._cardImage = this._element.querySelector(".place__image");
+    this._cardLikesCounter = this._element.querySelector(
+      ".place__likes-counter"
+    );
+    this._cardLikeButton = this._element.querySelector(".place__like-button");
+    this._cardDeleteButton = this._element.querySelector(
+      ".place__delete-button"
+    );
   }
 
   //Клонируем шаблон
@@ -32,18 +44,6 @@ export default class Card {
 
   //Создаем карточку
   generate() {
-    this._element = this._getElement();
-
-    this._cardTitle = this._element.querySelector(".place__title");
-    this._cardImage = this._element.querySelector(".place__image");
-    this._cardLikesCounter = this._element.querySelector(
-      ".place__likes-counter"
-    );
-    this._cardLikeButton = this._element.querySelector(".place__like-button");
-    this._cardDeleteButton = this._element.querySelector(
-      ".place__delete-button"
-    );
-
     this._cardTitle.textContent = this._name;
     this._cardImage.src = this._image;
     this._cardImage.alt = this._name;
