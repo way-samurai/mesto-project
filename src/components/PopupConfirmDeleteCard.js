@@ -21,3 +21,4 @@ export default class PopupConfirmDeleteCard extends Popup{
     super.open();
   }
 }
+

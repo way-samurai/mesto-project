@@ -22,7 +22,7 @@ import UserInfo from "../components/UserInfo";
 
 import Section from "../components/Section";
 
-import Card from "../components/Card";
+import Card from "../components/Сard";
 
 import FormValidator from "../components/FormValidator.js";
 
