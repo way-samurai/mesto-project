@@ -6,7 +6,7 @@ export class Api {
   }
 
   //Проверка статуса запроса
-  _onResponse = (res) => {
+  _checkResponse = (res) => {
     if (res.ok) {
       return res.json();
     }
@@ -20,7 +20,7 @@ export class Api {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "GET",
       headers: this._headers,
-    }).then(this._onResponse);
+    }).then(this._checkResponse);
   };
 
   //Изменение данных пользователя
@@ -32,7 +32,7 @@ export class Api {
         name: userName,
         about: userInfo,
       }),
-    }).then(this._onResponse);
+    }).then(this._checkResponse);
   };
 
   //Запрос изначальных карточек
@@ -40,7 +40,7 @@ export class Api {
     return fetch(`${this._baseUrl}/cards`, {
       method: "GET",
       headers: this._headers,
-    }).then(this._onResponse);
+    }).then(this._checkResponse);
   };
 
   //Добавление новой карточки
@@ -52,7 +52,7 @@ export class Api {
         name: placeName,
         link: imageLink,
       }),
-    }).then(this._onResponse);
+    }).then(this._checkResponse);
   };
 
   //Лайки
@@ -60,7 +60,7 @@ export class Api {
     return fetch(`${this._baseUrl}/cards/likes/${id}`, {
       method: method,
       headers: this._headers,
-    }).then(this._onResponse);
+    }).then(this._checkResponse);
   };
 
   //Удаление карточки
@@ -68,7 +68,7 @@ export class Api {
     return fetch(`${this._baseUrl}/cards/${id}`, {
       method: "DELETE",
       headers: this._headers,
-    }).then(this._onResponse);
+    }).then(this._checkResponse);
   };
 
   //Изменение аватара
@@ -79,7 +79,7 @@ export class Api {
       body: JSON.stringify({
         avatar: link,
       }),
-    }).then(this._onResponse);
+    }).then(this._checkResponse);
   };
 }
 
