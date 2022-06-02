@@ -32,17 +32,21 @@ import PopupWithImage from "../components/PopupWithImage";
 
 import PopupWithForm from "../components/PopupWithForm";
 
-//Валидация редактирования профиля
-const editProfileValidator = new FormValidator(profileFormSubmit, settings);
-editProfileValidator.enableValidation();
+//Валидация
+const formValidators = {}
 
-//Валидация редактирования аватара
-const editCreateAvatarValidator = new FormValidator(formChangeAvatar, settings);
-editCreateAvatarValidator.enableValidation();
+const enableValidation = (settings) => {
+  const formList = Array.from(document.querySelectorAll(settings.formSelector))
+  formList.forEach((formElement) => {
+    const validator = new FormValidator(formElement, settings)
+    const formName = formElement.getAttribute('name')
+    formValidators[formName] = validator;
+    validator.enableValidation();
+  });
+};
 
-//Валидация добавления карточки
-const addCardFormValidator = new FormValidator(popupAddForm, settings);
-addCardFormValidator.enableValidation();
+enableValidation(settings);
+
 
 let userDataFromServer = null;
 
@@ -146,19 +150,19 @@ const popupAddNewCard = new PopupWithForm(
 profileEditButton.addEventListener("click", () => {
   popupChangeUserInfo.setInputValues(userInfo.getInfoProfile());
   popupChangeUserInfo.open();
-  editProfileValidator.resetValidation();
+  formValidators['profile-edit'].resetValidation();
 });
 
 //слушатель открытия попапа изменения аватара
 profileAvatarContainer.addEventListener("click", () => {
   popupChangeUserAvatar.open();
-  editCreateAvatarValidator.resetValidation();
+  formValidators['changeAvatar'].resetValidation();
 });
 
 //слушатель открытия попапа добавлени карточки
 addCardButton.addEventListener("click", () => {
   popupAddNewCard.open();
-  addCardFormValidator.resetValidation();
+  formValidators['add-places'].resetValidation();
 });
 
 popupWithImage.setEventListeners();
