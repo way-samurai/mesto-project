@@ -193,3 +193,5 @@ function handleCardClick(name, link) {
 function handleCardDelete(id, element) {
   popupConfirmDeleteCard.open(id, element);
 }
+
+

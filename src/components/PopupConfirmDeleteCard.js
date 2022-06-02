@@ -1,8 +1,8 @@
 import Popup from "./Popup";
 
 export default class PopupConfirmDeleteCard extends Popup{
-  constructor(popupSelector, submitForm, form) {
-    super(popupSelector)
+  constructor(popup, submitForm, form) {
+    super(popup)
     this._submitForm = submitForm;
 
     this._form = form;
