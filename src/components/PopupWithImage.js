@@ -1,8 +1,8 @@
 import Popup from "./Popup";
 
 export default class PopupWithImage extends Popup {
-  constructor(popup) {
-    super(popup);
+  constructor(selector) {
+    super(selector);
     this._imgTitle = document.querySelector('.popup__image-caption');
     this._imgLink = document.querySelector('.popup__fullscreen-image');
   }

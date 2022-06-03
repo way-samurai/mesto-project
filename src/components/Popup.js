@@ -1,6 +1,7 @@
 export default class Popup {
-  constructor(popup) {
-    this._popup = popup;
+  constructor(selector) {
+    this._selector = selector;
+    this._popup = document.querySelector(this._selector);
   }
 
   //функция открытия модального окна

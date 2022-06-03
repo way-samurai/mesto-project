@@ -2,17 +2,13 @@ import "../pages/index.css";
 
 import {
   popupAddForm,
-  editPopup,
   profileFormSubmit,
   formChangeAvatar,
   settings,
-  confirmPopup,
   openImage,
   profileEditButton,
-  changeAvatarPopup,
   profileAvatarContainer,
   confirmForm,
-  addPopup,
   addCardButton,
 } from "../components/utils/data.js";
 
@@ -69,7 +65,7 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
 
 //Удаление карточки со страницы
 const popupConfirmDeleteCard = new PopupConfirmDeleteCard(
-  confirmPopup,
+  "#confirm",
   function () {
     popupConfirmDeleteCard.renderLoading(true, "Да");
     api
@@ -87,11 +83,11 @@ const popupConfirmDeleteCard = new PopupConfirmDeleteCard(
 );
 
 //Попап с изображением
-const popupWithImage = new PopupWithImage(openImage);
+const popupWithImage = new PopupWithImage("#openImage");
 
 //Попап редактирования профиля
 const popupChangeUserInfo = new PopupWithForm(
-  editPopup,
+  "#editPopup",
   function (data) {
     popupChangeUserInfo.renderLoading(true);
     api
@@ -110,7 +106,7 @@ const popupChangeUserInfo = new PopupWithForm(
 
 //Попап редактирования аватара
 const popupChangeUserAvatar = new PopupWithForm(
-  changeAvatarPopup,
+  "#changeAvatarPopup",
   function (data) {
     popupChangeUserAvatar.renderLoading(true);
     api
@@ -129,7 +125,7 @@ const popupChangeUserAvatar = new PopupWithForm(
 
 //Попап добавления новой карточки
 const popupAddNewCard = new PopupWithForm(
-  addPopup,
+  "#addPopup",
   function (data) {
     popupAddNewCard.renderLoading(true, "Создать");
     api
