@@ -1,6 +1,6 @@
 ## Проект: Место
 
-<img src="demo/main_mesto.png" width="400">
+<img src="demo/main.png" width="400">
 
 ___
 ## Обзор
